@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity2"
+    android:background="@drawable/backgroundi">
+
+    <LinearLayout
+        android:layout_width="409dp"
+        android:layout_height="729dp"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="1dp">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:fontFamily="sans-serif-light"
+            android:gravity="center"
+            android:text="Event Information"
+            android:textColor="@color/white"
+            android:textSize="45dp" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-light"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="4dp"
+            android:text="Name :"
+            android:textColor="@color/white"
+            android:textSize="20dp" />
+
+        <EditText
+            android:id="@+id/nameOfEvent"
+            android:hint="playing tennis"
+            android:textColorHint="#A8A7B1"
+            android:paddingLeft="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/for_flds"
+            android:layout_marginTop="2dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"></EditText>
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-light"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:text="Nature/Type :"
+            android:textColor="@color/white"
+            android:textSize="20dp" />
+
+        <EditText
+            android:id="@+id/typeOfEvent"
+            android:hint="sports"
+            android:textColorHint="#A8A7B1"
+            android:paddingLeft="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/for_flds"
+            android:layout_marginTop="2dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"></EditText>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+         <TextView
+            android:id="@+id/textView4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-light"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:text="Date :"
+            android:textColor="@color/white"
+            android:textSize="20dp" />
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-light"
+            android:layout_marginLeft="150dp"
+            android:layout_marginTop="10dp"
+            android:text="Time :"
+            android:textColor="@color/white"
+            android:textSize="20dp" /></LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+        <EditText
+            android:id="@+id/dateOfEvent"
+            android:hint="03-06-2022"
+            android:textColorHint="#A8A7B1"
+            android:paddingLeft="10dp"
+            android:layout_width="170dp"
+            android:layout_height="40dp"
+            android:background="@drawable/for_flds"
+            android:layout_marginTop="2dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="20dp"></EditText>
+
+
+        <EditText
+            android:id="@+id/timeOfEvent"
+            android:hint="7:40"
+            android:textColorHint="#A8A7B1"
+            android:paddingLeft="10dp"
+            android:layout_width="170dp"
+            android:layout_height="40dp"
+            android:background="@drawable/for_flds"
+            android:layout_marginTop="2dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"></EditText></LinearLayout>
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-light"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:text="Priority :"
+            android:textColor="@color/white"
+            android:textSize="20dp" />
+
+        <EditText
+            android:id="@+id/priorityOfEvent"
+            android:hint="high"
+            android:textColorHint="#A8A7B1"
+            android:paddingLeft="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/for_flds"
+            android:layout_marginTop="2dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"></EditText>
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-light"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="15dp"
+            android:text="Tasks/Notes :"
+            android:textColor="@color/white"
+            android:textSize="20dp" />
+
+        <EditText
+            android:id="@+id/tasksOfEvent"
+            android:hint="I have to drink wated before going"
+            android:paddingBottom="60dp"
+            android:textColorHint="#A8A7B1"
+            android:paddingLeft="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@drawable/for_flds"
+            android:layout_marginTop="2dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"></EditText>
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginRight="80dp"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/bottoni"
+            android:text="Submit"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:fontFamily="sans-serif-light"
+            >
+
+        </androidx.appcompat.widget.AppCompatButton>
+        
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
