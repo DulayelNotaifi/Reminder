@@ -13,6 +13,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.Calendar;
+
 public class Activity2 extends AppCompatActivity {
 
     EditText eventName,eventDescription;
@@ -33,40 +35,26 @@ public class Activity2 extends AppCompatActivity {
                     eventName.setHint("Please fill the event name");
                     eventName.setHintTextColor(getResources().getColor(R.color.warning));
                 }
-
-//             if(eventDescription.getText().toString().isEmpty()){
-//                 eventDescription.
-//             }
                 else 
                     addEventToCalender();
             }
         });
-
-
-    }
+    }//end on Create
 
     private void addEventToCalender() {
-        Intent intent = new Intent(Intent.ACTION_INSERT);
-        intent.setData(CalendarContract.Events.CONTENT_URI); //the data we are working with ia a calendar even
-
-        intent.putExtra(CalendarContract.Events.TITLE,eventName.getText().toString());
+        
+        Calendar beginTime = Calendar.getInstance();
+        beginTime.set(2012, 0, 19, 7, 30);
+        Calendar endTime = Calendar.getInstance();
+        endTime.set(2012, 0, 19, 8, 30);
+        Intent intent = new Intent(Intent.ACTION_INSERT)
+                .setData(CalendarContract.Events.CONTENT_URI)
+                .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, beginTime.getTimeInMillis())
+                .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, endTime.getTimeInMillis())
+                .putExtra(CalendarContract.Events.TITLE, eventName.getText().toString());
         if(!eventDescription.getText().toString().isEmpty()){
-            intent.putExtra(CalendarContract.Events.DESCRIPTION, eventDescription.getText().toString());
-        }
-        intent.putExtra(CalendarContract.Events.ALL_DAY,false);
+            intent.putExtra(CalendarContract.Events.DESCRIPTION, eventDescription.getText().toString());}
 
-//        String stime = "7:20";
-//        intent.putExtra(CalendarContract.Events.DTSTART,stime);
-//
-//        String etime = "7:20";
-//        intent.putExtra(CalendarContract.Events.DTEND,etime);
-
-        if(intent.resolveActivity(getPackageManager()) != null){
-            startActivity(intent);
-        }
-        else
-            Toast.makeText(this,"Error",Toast.LENGTH_SHORT);
-
-
-    }
+        startActivity(intent);
+   }
 }
