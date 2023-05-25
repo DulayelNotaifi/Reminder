@@ -11,5 +11,6 @@
     <color name="textColor">#554484</color>
     <color name="backg2">#B7AEFF</color>
     <color name="simtowhite">#F0EEFE</color>
+    <color name="warning">#E53935</color>
 
 </resources>

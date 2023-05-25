@@ -166,18 +166,19 @@
             android:layout_marginTop="2dp"
             android:layout_marginRight="20dp"
             android:layout_marginLeft="20dp"></EditText>
+
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/addEvent"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_marginRight="80dp"
             android:layout_marginLeft="80dp"
             android:layout_marginTop="32dp"
+            android:layout_marginRight="80dp"
             android:background="@drawable/bottoni"
+            android:fontFamily="sans-serif-light"
             android:text="Submit"
             android:textColor="@color/white"
-            android:textSize="20dp"
-            android:fontFamily="sans-serif-light"
-            >
+            android:textSize="20dp">
 
         </androidx.appcompat.widget.AppCompatButton>
         
