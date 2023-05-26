@@ -28,11 +28,6 @@ public class AddEventPage extends AppCompatActivity {
         addEvent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(eventName.getText().toString().isEmpty()) {
-                    eventName.setHint("Please fill the event name");
-                    eventName.setHintTextColor(getResources().getColor(R.color.warning));
-                }
-                else 
                     addEventToCalender();
             }
         });
@@ -40,18 +35,5 @@ public class AddEventPage extends AppCompatActivity {
 
     private void addEventToCalender() {
         
-        Calendar beginTime = Calendar.getInstance();
-        beginTime.set(2012, 0, 19, 7, 30);
-        Calendar endTime = Calendar.getInstance();
-        endTime.set(2012, 0, 19, 8, 30);
-        Intent intent = new Intent(Intent.ACTION_INSERT)
-                .setData(CalendarContract.Events.CONTENT_URI)
-                .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, beginTime.getTimeInMillis())
-                .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, endTime.getTimeInMillis())
-                .putExtra(CalendarContract.Events.TITLE, eventName.getText().toString());
-        if(!eventDescription.getText().toString().isEmpty()){
-            intent.putExtra(CalendarContract.Events.DESCRIPTION, eventDescription.getText().toString());}
-
-        startActivity(intent);
    }
 }
