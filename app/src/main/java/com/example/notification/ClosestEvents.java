@@ -16,6 +16,7 @@ public class ClosestEvents extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_1);
         button=(Button) findViewById(R.id.appCompatButton);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
