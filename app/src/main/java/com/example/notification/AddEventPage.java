@@ -151,7 +151,6 @@ public class AddEventPage extends AppCompatActivity implements DatePickerDialog.
             am_pm = "AM";
         else if (datetime.get(Calendar.AM_PM) == Calendar.PM)
             am_pm = "PM";
-
         EventTime = h +":"+m +" " +am_pm;
     }
 }

@@ -8,6 +8,9 @@
 
 <com.squareup.timessquare.CalendarPickerView
     android:id="@+id/calendar"
+    app:tsquare_headerTextColor="@color/simtowhite"
+    android:backgroundTint="#C9A27FCD"
+    app:tsquare_titleTextColor="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent"/>
 
