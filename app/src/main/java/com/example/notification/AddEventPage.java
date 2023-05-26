@@ -12,6 +12,9 @@ import android.os.Bundle;
 
 import android.provider.CalendarContract;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -33,11 +36,26 @@ public class AddEventPage extends AppCompatActivity implements DatePickerDialog.
     EditText eventName,eventDescription;
     Button addEvent,dateButt,timeButt;
 
-    String EventDate,EventTime;
+    String EventDate,EventTime,PeriorityItem;
+
+    String[] periorityItems = {"High","Medium","Low"};
+    AutoCompleteTextView auto1;
+    ArrayAdapter<String> adapt;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_2);
+
+        auto1 = findViewById(R.id.auto1);
+        adapt = new ArrayAdapter<String>(this,R.layout.per_items,periorityItems);
+        auto1.setAdapter(adapt);
+
+        auto1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                PeriorityItem = adapterView.getItemAtPosition(i).toString();
+            }
+        });
 
         eventName = findViewById(R.id.nameOfEvent);
         eventDescription = findViewById(R.id.tasksOfEvent);
