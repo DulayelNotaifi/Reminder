@@ -33,10 +33,10 @@ import java.util.List;
 
 public class AddEventPage extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener{
 
-    EditText eventName,eventDescription;
+    EditText eventNameEditText,eventNotesEditText;
     Button addEvent,dateButt,timeButt;
 
-    String EventDate,EventTime,PeriorityItem,TypeItem;
+    String NameOfEvent,NotesOfEvent,EventDate,EventTime,PeriorityItem,TypeItem;
 
     String[] periorityItems = {"High","Medium","Low"};
     String[] typeItems = {"Meeting","Picnic","Presentation","Shopping","Family Visit","Study",
@@ -70,11 +70,13 @@ public class AddEventPage extends AppCompatActivity implements DatePickerDialog.
             }
         });
 
-        eventName = findViewById(R.id.nameOfEvent);
-        eventDescription = findViewById(R.id.tasksOfEvent);
+        eventNameEditText = findViewById(R.id.nameOfEvent);
+        eventNotesEditText = findViewById(R.id.tasksOfEvent);
         addEvent = findViewById(R.id.addEvent);
         dateButt = findViewById(R.id.dateOfEvent);
         timeButt = findViewById(R.id.timeOfEvent);
+        NameOfEvent = eventNameEditText.getText().toString();
+        NotesOfEvent = eventNotesEditText.getText().toString();
 
 
         //date listener
@@ -100,13 +102,15 @@ public class AddEventPage extends AppCompatActivity implements DatePickerDialog.
         addEvent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-              //   addEventToDB();
+               addEventToDB();
                 addEventToCalender();
             }
         });//end of add event listener
     }//end on Create
 
     private void addEventToDB() {
+        MyDBHelper myDB = new MyDBHelper(AddEventPage.this);
+        myDB.addEvent(NameOfEvent,TypeItem,EventDate,EventTime,PeriorityItem,NotesOfEvent);
     }//end addEventToDB
 
     private void addEventToCalender() {
