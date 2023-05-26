@@ -36,24 +36,37 @@ public class AddEventPage extends AppCompatActivity implements DatePickerDialog.
     EditText eventName,eventDescription;
     Button addEvent,dateButt,timeButt;
 
-    String EventDate,EventTime,PeriorityItem;
+    String EventDate,EventTime,PeriorityItem,TypeItem;
 
     String[] periorityItems = {"High","Medium","Low"};
-    AutoCompleteTextView auto1;
-    ArrayAdapter<String> adapt;
+    String[] typeItems = {"Meeting","Picnic","Presentation","Shopping","Family Visit","Study",
+            "Appointment","Eid","Travel day","Other"};
+    AutoCompleteTextView Periorityauto,Typesauto;
+    ArrayAdapter<String> Periorityadaptor,Typesadaptor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_2);
 
-        auto1 = findViewById(R.id.auto1);
-        adapt = new ArrayAdapter<String>(this,R.layout.per_items,periorityItems);
-        auto1.setAdapter(adapt);
-
-        auto1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+         //Setup Priority dropDown Menu
+        Periorityauto = findViewById(R.id.auto1);
+        Periorityadaptor = new ArrayAdapter<String>(this,R.layout.per_items,periorityItems);
+        Periorityauto.setAdapter(Periorityadaptor);
+        Periorityauto.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 PeriorityItem = adapterView.getItemAtPosition(i).toString();
+            }
+        });
+
+        //Setup Types dropDown Menu
+        Typesauto = findViewById(R.id.auto2);
+        Typesadaptor = new ArrayAdapter<String>(this,R.layout.eventtype_items,typeItems);
+        Typesauto.setAdapter(Typesadaptor);
+        Typesauto.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                TypeItem = adapterView.getItemAtPosition(i).toString();
             }
         });
 

@@ -58,17 +58,33 @@
             android:textColor="@color/white"
             android:textSize="20dp" />
 
-        <EditText
-            android:id="@+id/typeOfEvent"
-            android:hint="sports"
-            android:textColorHint="#A8A7B1"
-            android:paddingLeft="10dp"
+<!--        <EditText-->
+<!--            android:id="@+id/typeOfEvent"-->
+<!--            android:hint="sports"-->
+<!--            android:textColorHint="#A8A7B1"-->
+<!--            android:paddingLeft="10dp"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="40dp"-->
+<!--            android:background="@drawable/for_flds"-->
+<!--            android:layout_marginTop="2dp"-->
+<!--            android:layout_marginRight="20dp"-->
+<!--            android:layout_marginLeft="20dp"></EditText>-->
+        ///////////////////////////
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:background="@drawable/for_flds"
-            android:layout_marginTop="2dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="20dp"></EditText>
+            android:hint="@string/select_Type"
+            android:layout_height="wrap_content"
+            >
+            <AutoCompleteTextView
+                android:id="@+id/auto2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="none"
+                android:text="Meeting"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+        ///////////////////////////
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
