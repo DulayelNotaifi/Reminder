@@ -114,18 +114,26 @@ public class AddEventPage extends AppCompatActivity implements DatePickerDialog.
     }//end addEventToDB
 
     private void addEventToCalender() {
-        CalendarPickerView datePicker = findViewById(R.id.calendar);
 
-        Calendar c = Calendar.getInstance();
-        c.set(2023,5,29);
 
-        Date d = new Date(2023,5,29);
-        List<Date> g = new ArrayList<Date>();
-        g.add(d);
-        Toast.makeText(this,""+g.isEmpty(),Toast.LENGTH_SHORT).show();
-        datePicker.highlightDates(g);
+       CalenderPage p = new CalenderPage();
+    //   p.hilght();
+
+
+
+//        ArrayList<Date> d = new ArrayList<Date>();
+//        Date d1 = new Date(2023,5,29);
+//        Date d2 = new Date(2023,5,28);
+//        Date d3 = new Date(2023,5,27);
+//        d.add(d1);
+//        d.add(d2);
+//        d.add(d3);
+//        datePicker.highlightDates(d);
+//        Toast.makeText(this,""+d.isEmpty(),Toast.LENGTH_SHORT).show();
+//        datePicker.highlightDates(d);
 
    }//end addEventToCalender
+
 
 
     @Override
