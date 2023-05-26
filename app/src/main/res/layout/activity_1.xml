@@ -133,13 +133,6 @@
         app:layout_constraintTop_toBottomOf="@+id/appCompatButton8"
         tools:ignore="DuplicateIds,MissingConstraints" />
 
-    <Button
-        android:id="@+id/viewCalendar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="viewCalendar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textView"
@@ -160,6 +153,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/nav"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/menushape"
+            android:layout_alignParentBottom="true"
+            app:menu="@menu/menu_bar"
+            app:itemTextColor="@drawable/menu_selection"
+            app:itemIconTint="@drawable/menu_selection">
+
+        </com.google.android.material.bottomnavigation.BottomNavigationView>
+    </RelativeLayout>
 
 
 

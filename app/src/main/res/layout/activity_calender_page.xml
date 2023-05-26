@@ -14,4 +14,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"/>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/nav"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/menushape"
+            android:layout_alignParentBottom="true"
+            app:menu="@menu/menu_bar"
+            app:itemTextColor="@drawable/menu_selection"
+            app:itemIconTint="@drawable/menu_selection">
+
+        </com.google.android.material.bottomnavigation.BottomNavigationView>
+    </RelativeLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

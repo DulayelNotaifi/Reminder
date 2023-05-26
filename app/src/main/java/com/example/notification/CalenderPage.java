@@ -1,9 +1,16 @@
 package com.example.notification;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
+import com.squareup.timessquare.CalendarCellDecorator;
+import com.squareup.timessquare.CalendarCellView;
 import com.squareup.timessquare.CalendarPickerView;
 
 import java.text.ParseException;
@@ -15,16 +22,19 @@ import java.util.Date;
 public class CalenderPage extends AppCompatActivity {
 
     CalendarPickerView datePicker;
+    BottomNavigationView navigation;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calender_page);
 
+        navigation = findViewById(R.id.nav);
+
         Date today = new Date();
         Calendar nextYear = Calendar.getInstance();
         nextYear.add(Calendar.YEAR, 1);
 
-         datePicker = findViewById(R.id.calendar);
+        datePicker = findViewById(R.id.calendar);
         datePicker.init(today, nextYear.getTime()).withSelectedDate(today);
         ArrayList<Date> d = new ArrayList<Date>();
         Date d1 = parseDate("2023-05-28");
@@ -35,11 +45,26 @@ public class CalenderPage extends AppCompatActivity {
         d.add(d3);
         datePicker.highlightDates(d);
 
+        navigation.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.home:
+                       openhome();
+                    case R.id.calen:
+                        break;
+                }
+                return true;
+            }
+        });
+
+
+
 
         datePicker.setOnDateSelectedListener(new CalendarPickerView.OnDateSelectedListener() {
             @Override
             public void onDateSelected(Date date) {
-                dateSelected();
+
             }
 
             @Override
@@ -49,9 +74,10 @@ public class CalenderPage extends AppCompatActivity {
         });
     }
 
-    private void dateSelected() {
+    private void openhome() {
+        Intent intent=new Intent(this, ClosestEvents.class);
+        startActivity(intent);
     }
-
 
 
     public static Date parseDate(String date) {
