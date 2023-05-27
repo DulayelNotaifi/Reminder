@@ -19,6 +19,8 @@ public class DateFragment extends DialogFragment {
         int y = c.get(Calendar.YEAR);
         int m = c.get(Calendar.MONTH);
         int d = c.get(Calendar.DAY_OF_MONTH);
-        return new DatePickerDialog(getActivity(),(DatePickerDialog.OnDateSetListener)getActivity(),y,m,d);
+        DatePickerDialog dp=new DatePickerDialog(getActivity(),(DatePickerDialog.OnDateSetListener)getActivity(),y,m,d);
+        dp.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+        return dp;
     }
 }
