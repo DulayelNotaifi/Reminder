@@ -41,6 +41,8 @@ public class CalenderPage extends AppCompatActivity {
         datePicker.init(today, nextYear.getTime()).withSelectedDate(today);
 
           MyDBHelper dbHelper = new MyDBHelper(this);
+
+
           List<Event> Events = dbHelper.readAllEvents();
         Toast.makeText(this,""+Events.size(), Toast.LENGTH_SHORT).show();
 

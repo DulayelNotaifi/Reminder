@@ -142,4 +142,8 @@ public class MyDBHelper extends SQLiteOpenHelper {
         db.delete(TABLE_NAME, COLUMN_ID + "=" + idNum, null);
         db.close();
     }
+    void deleteAllData(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DELETE FROM " + TABLE_NAME);
+    }
 }
