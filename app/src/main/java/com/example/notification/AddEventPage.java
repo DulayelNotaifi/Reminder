@@ -3,18 +3,22 @@ package com.example.notification;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.DialogFragment;
 
 import android.app.AlarmManager;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import android.provider.CalendarContract;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -22,6 +26,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -110,8 +115,13 @@ public class AddEventPage extends AppCompatActivity implements DatePickerDialog.
             public void onClick(View view) {
                 NameOfEvent = eventNameEditText.getText().toString();
                 NotesOfEvent = eventNotesEditText.getText().toString();
-                addEventToDB();
-                scheduleNotification() ;
+                if(NameOfEvent==null||NotesOfEvent==null||EventDate==null||EventTime==null||PeriorityItem==null||TypeItem==null)
+                    showWarningDialog("Please fill all the required fields");
+                else {
+                    addEventToDB();
+                    //  addEventToCalender();
+                    scheduleNotification();
+                }
             }
         });//end of add event listener
     }//end on Create
@@ -184,4 +194,30 @@ public class AddEventPage extends AppCompatActivity implements DatePickerDialog.
         NotificationManager nm=( NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         nm.createNotificationChannel(nc);}
     }
+    private void showWarningDialog(String msg){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AlertDialogTheme);
+        View view = LayoutInflater.from(this).inflate(
+                R.layout.layout_error_dailog,
+                (ConstraintLayout)findViewById(R.id.layoutDialogContainer)
+        );
+        builder.setView(view);
+        ((TextView) view.findViewById(R.id.errorMessage)).setText(msg);
+
+
+        final AlertDialog alertDialog = builder.create();
+        view.findViewById(R.id.buttonAction).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertDialog.dismiss();
+
+            }
+        });
+
+
+        if (alertDialog.getWindow() != null){
+            alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+        }
+        alertDialog.show();
+    }
+
 }
