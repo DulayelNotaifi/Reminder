@@ -111,4 +111,30 @@ public class MyDBHelper extends SQLiteOpenHelper {
         // Return the list of retrieved events
         return events;
     }
+
+    public List<Event> readAllEvents(){
+        List<Event> events = new ArrayList<>();
+        String selectQuery = "SELECT * FROM " + TABLE_NAME;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                // Retrieve the data for each column in the current row
+                int id = cursor.getInt(0);
+                String name = cursor.getString(1);
+                String type = cursor.getString(2);
+                String date = cursor.getString(3);
+                String time = cursor.getString(4);
+                String priority = cursor.getString(5);
+                String notes = cursor.getString(6);
+
+                // Create a new Event object with the retrieved data and add it to the list
+                Event event = new Event(id, name, type, date,time, priority, notes);
+                events.add(event);
+
+            } while (cursor.moveToNext());
+        }//end if
+     return events;
+    }
 }
