@@ -26,12 +26,10 @@ public class CalenderPage extends AppCompatActivity {
 
     CalendarPickerView datePicker;
     BottomNavigationView navigation;
-    List<Event> events;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calender_page);
-        Toast.makeText(this,"test1",Toast.LENGTH_SHORT).show();
 
         navigation = findViewById(R.id.nav);
 
@@ -42,16 +40,29 @@ public class CalenderPage extends AppCompatActivity {
         datePicker = findViewById(R.id.calendar);
         datePicker.init(today, nextYear.getTime()).withSelectedDate(today);
 
+          MyDBHelper dbHelper = new MyDBHelper(this);
+          List<Event> Events = dbHelper.readAllEvents();
+        Toast.makeText(this,""+Events.size(), Toast.LENGTH_SHORT).show();
+
+
+//        MyDBHelper dbHelper = new MyDBHelper(this);
+//        List<Event> Events = dbHelper.readAllEvents();
+//        CustomCalendarCellDecorator decorator = new CustomCalendarCellDecorator(Events, datePicker);
+//   ERROR     datePicker.setDecorators(Collections.singletonList(decorator));
+
 //        Event e = new Event(11, "test11", "Meeting", "2023-05-30", "07:30", "High", "");
 //        Event e2 = new Event(12, "test12", "Presentation", "2023-05-31", "07:30", "High", "");
-
-        MyDBHelper dbHelper = new MyDBHelper(this);
-        List<Event> Events = dbHelper.readAllEvents();
-
+//        Event e3 = new Event(13, "test13", "Shopping", "2023-06-01", "07:30", "High", "");
+//        Event e4 = new Event(14, "test14", "Study", "2023-06-04", "07:30", "High", "");
+//        Event e5 = new Event(15, "test15", "Eid", "2023-06-06", "07:30", "High", "");
+//        Event e6 = new Event(16, "test16", "Other", "2023-06-07", "07:30", "High", "");
+//
+//        List<Event> events = new ArrayList<>();
 //        events.add(e);
 //        events.add(e2);
-        CustomCalendarCellDecorator decorator = new CustomCalendarCellDecorator(Events, datePicker);
-        datePicker.setDecorators(Collections.singletonList(decorator));
+//        events.add(e3);events.add(e4);events.add(e5);events.add(e6);
+//        CustomCalendarCellDecorator decorator = new CustomCalendarCellDecorator(events, datePicker);
+//        datePicker.setDecorators(Collections.singletonList(decorator));
 
         // add a public method named getCalendarPickerView() that returns a reference to the calendarPickerView object
 
@@ -82,7 +93,7 @@ public class CalenderPage extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.home:
-                       openhome();
+                        openhome();
                     case R.id.calen:
                         break;
                 }
@@ -104,24 +115,6 @@ public class CalenderPage extends AppCompatActivity {
 
             }
         });
-    }
-    @Override
-    public void onResume(){
-        super.onResume();
-        Toast.makeText(this,"test2",Toast.LENGTH_SHORT).show();
-      //  MyDBHelper dbHelper = new MyDBHelper(this);
-      //  List<Event> Events = dbHelper.readAllEvents();
-
-
-        Event e = new Event(11, "test11", "Meeting", "2023-05-30", "07:30", "High", "");
-        Event e2 = new Event(12, "test12", "Presentation", "2023-05-31", "07:30", "High", "");
-        events.add(e);
-        events.add(e2);
-
-        Toast.makeText(this,""+events.size(),Toast.LENGTH_SHORT).show();
-        CustomCalendarCellDecorator decorator = new CustomCalendarCellDecorator(events, datePicker);
-        datePicker.setDecorators(Collections.singletonList(decorator));
-
     }
 
     private void openhome() {
