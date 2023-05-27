@@ -2,11 +2,15 @@ package com.example.notification;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MyDBHelper extends SQLiteOpenHelper {
 
@@ -66,5 +70,45 @@ public class MyDBHelper extends SQLiteOpenHelper {
             Toast.makeText(context, "Event Added Successfully!", Toast.LENGTH_SHORT).show();
         }
 
+    }
+
+    public List<Event> getClosestEvents() {
+        List<Event> events = new ArrayList<>();
+
+        // Define the SQL query to retrieve the closest 5 events based on the date
+        String selectQuery = "SELECT * FROM " + TABLE_NAME + " WHERE " + COLUMN_DATE + " >= date('now') ORDER BY " + COLUMN_DATE + " ASC LIMIT 5";
+
+        // Open a connection to the database
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        // Execute the query and retrieve the resulting cursor
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        // Iterate over the cursor and retrieve the data for each row
+
+        if (cursor.moveToFirst()) {
+            do {
+                // Retrieve the data for each column in the current row
+                int id = cursor.getInt(0);
+                String name = cursor.getString(1);
+                String type = cursor.getString(2);
+                String date = cursor.getString(3);
+                String time = cursor.getString(4);
+                String priority = cursor.getString(5);
+                String notes = cursor.getString(6);
+
+                // Create a new Event object with the retrieved data and add it to the list
+                Event event = new Event(id, name, type, date,time, priority, notes);
+                events.add(event);
+
+            } while (cursor.moveToNext());
+        }
+
+        // Close the cursor and the database connection
+        cursor.close();
+        db.close();
+
+        // Return the list of retrieved events
+        return events;
     }
 }

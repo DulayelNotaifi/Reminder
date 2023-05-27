@@ -21,7 +21,7 @@
         android:layout_marginBottom="1dp"
         android:background="@drawable/bottonii"
         android:fontFamily="sans-serif-light"
-        android:text="1- playing tennis"
+        android:text="1- "
         android:textColor="@color/white"
         android:textSize="20dp"
         app:layout_constraintBottom_toTopOf="@+id/appCompatButton3"
@@ -156,20 +156,22 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="-77dp"
+        tools:layout_editor_absoluteY="0dp">
+
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/nav"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/menushape"
             android:layout_alignParentBottom="true"
-            app:menu="@menu/menu_bar"
+            android:background="@drawable/menushape"
+            app:itemIconTint="@drawable/menu_selection"
             app:itemTextColor="@drawable/menu_selection"
-            app:itemIconTint="@drawable/menu_selection">
+            app:menu="@menu/menu_bar">
 
         </com.google.android.material.bottomnavigation.BottomNavigationView>
     </RelativeLayout>
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
