@@ -42,15 +42,19 @@ public class CalenderPage extends AppCompatActivity {
 
           MyDBHelper dbHelper = new MyDBHelper(this);
 
-
           List<Event> Events = dbHelper.readAllEvents();
         Toast.makeText(this,""+Events.size(), Toast.LENGTH_SHORT).show();
+        for(int j=0; j<Events.size();j++){
+            Toast.makeText(this,Events.get(j).getName(),Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,Events.get(j).getDate(),Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,Events.get(j).getNotes(),Toast.LENGTH_SHORT).show();
+        }
 
 
 //        MyDBHelper dbHelper = new MyDBHelper(this);
 //        List<Event> Events = dbHelper.readAllEvents();
-//        CustomCalendarCellDecorator decorator = new CustomCalendarCellDecorator(Events, datePicker);
-//   ERROR     datePicker.setDecorators(Collections.singletonList(decorator));
+        CustomCalendarCellDecorator decorator = new CustomCalendarCellDecorator(Events, datePicker);
+      datePicker.setDecorators(Collections.singletonList(decorator));
 
 //        Event e = new Event(11, "test11", "Meeting", "2023-05-30", "07:30", "High", "");
 //        Event e2 = new Event(12, "test12", "Presentation", "2023-05-31", "07:30", "High", "");

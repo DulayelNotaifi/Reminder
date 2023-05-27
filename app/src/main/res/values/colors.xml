@@ -13,4 +13,17 @@
     <color name="simtowhite">#F0EEFE</color>
     <color name="warning">#E53935</color>
 
+    <color name="MeetingColor">#B71E88E5</color>
+    <color name="PicnicColor">#C67CB342</color>
+    <color name="PresentationColor">#8DF39621</color>
+    <color name="ShoppingColor">#81D89CB2</color>
+    <color name="FamilyVisitColor">#ADDE84F6</color>
+    <color name="StudyColor">#ADEDDA59</color>
+    <color name="AppointmentColor">#ADED596A</color>
+    <color name="EidColor">#ADED8359</color>
+    <color name="TraveldayColor">#8800897B</color>
+    <color name="OtherColor">#88749097</color>
+
+
+
 </resources>

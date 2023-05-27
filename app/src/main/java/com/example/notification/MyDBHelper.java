@@ -62,7 +62,13 @@ public class MyDBHelper extends SQLiteOpenHelper {
         cv.put(COLUMN_DATE,date);
         cv.put(COLUMN_TIME,time);
         cv.put(COLUMN_PRIORITY,priority);
+
+        if(!notes.isEmpty())
         cv.put(COLUMN_NOTES,notes);
+        else
+            cv.put(COLUMN_NOTES,"no notes");
+
+
         long result = db.insert(TABLE_NAME,null, cv);
         if(result == -1){
             Toast.makeText(context, "Failed to add the event", Toast.LENGTH_SHORT).show();

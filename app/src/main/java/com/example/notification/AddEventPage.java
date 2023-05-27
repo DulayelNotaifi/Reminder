@@ -186,14 +186,23 @@ public class AddEventPage extends AppCompatActivity implements DatePickerDialog.
     @Override
     public void onDateSet(DatePicker datePicker, int year, int month, int day) {
         //format the calender object using the chosen date
-        Calendar c = Calendar.getInstance();
-        c.set(Calendar.YEAR,year);
-        c.set(Calendar.MONTH,month);
-        c.set(Calendar.DAY_OF_MONTH,day);
-        cad.set(Calendar.YEAR,year);
-        cad.set(Calendar.MONTH,month);
-        cad.set(Calendar.DAY_OF_MONTH,day);
-        EventDate = DateFormat.getDateInstance().format(c.getTime());
+//        Calendar c = Calendar.getInstance();
+//        c.set(Calendar.YEAR,year);
+//        c.set(Calendar.MONTH,month);
+//        c.set(Calendar.DAY_OF_MONTH,day);
+//        cad.set(Calendar.YEAR,year);
+//        cad.set(Calendar.MONTH,month);
+//        cad.set(Calendar.DAY_OF_MONTH,day);
+        String monthd ="";
+        month = month+1;
+        if(month < 10){
+            monthd = "0"+month;
+        }
+        else{
+            monthd = ""+month;
+        }
+        String date = ""+year +"-"+monthd+"-"+day;
+        EventDate = date;
     }//end onDateSet
 
     @Override
