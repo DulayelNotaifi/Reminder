@@ -50,7 +50,7 @@ public class ClosestEvents extends AppCompatActivity{
         closestEvent3 = (Button) findViewById(R.id.appCompatButton4);
         closestEvent4 = (Button) findViewById(R.id.appCompatButton5);
         closestEvent5 = (Button) findViewById(R.id.appCompatButton8);
-        getClsestEvents();
+        getClosestEvents();
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -73,7 +73,7 @@ public class ClosestEvents extends AppCompatActivity{
         });
     }
 
-private void getClsestEvents(){
+private void getClosestEvents(){
     // Create an instance of the database helper
     MyDBHelper dbHelper = new MyDBHelper(this);
 
@@ -85,18 +85,48 @@ private void getClsestEvents(){
     // Assign the name of each retrieved event to a button view in the layout
     if (closestEvents.size() >= 1) {
         closestEvent1.setText(closestEvents.get(0).getName());
+        closestEvent1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showWarningDialog(closestEvents.get(0).getName(), closestEvents.get(0).getType(), closestEvents.get(0).getDate(), closestEvents.get(0).getTime(), closestEvents.get(0).getPriority(), closestEvents.get(0).getNotes());
+            }
+        });
     }
     if (closestEvents.size() >= 2) {
         closestEvent2.setText(closestEvents.get(1).getName());
+        closestEvent2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showWarningDialog(closestEvents.get(1).getName(), closestEvents.get(1).getType(), closestEvents.get(1).getDate(), closestEvents.get(1).getTime(), closestEvents.get(1).getPriority(), closestEvents.get(1).getNotes());
+            }
+        });
     }
     if (closestEvents.size() >= 3) {
         closestEvent3.setText(closestEvents.get(2).getName());
+        closestEvent3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showWarningDialog(closestEvents.get(2).getName(), closestEvents.get(2).getType(), closestEvents.get(2).getDate(), closestEvents.get(2).getTime(), closestEvents.get(2).getPriority(), closestEvents.get(2).getNotes());
+            }
+        });
     }
     if (closestEvents.size() >= 4) {
         closestEvent4.setText(closestEvents.get(3).getName());
+        closestEvent4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showWarningDialog(closestEvents.get(3).getName(), closestEvents.get(3).getType(), closestEvents.get(3).getDate(), closestEvents.get(3).getTime(), closestEvents.get(3).getPriority(), closestEvents.get(3).getNotes());
+            }
+        });
     }
     if (closestEvents.size() >= 5) {
         closestEvent5.setText(closestEvents.get(4).getName());
+        closestEvent5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showWarningDialog(closestEvents.get(4).getName(), closestEvents.get(4).getType(), closestEvents.get(4).getDate(), closestEvents.get(4).getTime(), closestEvents.get(4).getPriority(), closestEvents.get(4).getNotes());
+            }
+        });
     }
 }
 
