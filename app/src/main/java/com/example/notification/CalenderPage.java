@@ -38,6 +38,18 @@ public class CalenderPage extends AppCompatActivity {
 
         datePicker = findViewById(R.id.calendar);
         datePicker.init(today, nextYear.getTime()).withSelectedDate(today);
+
+        Event e = new Event(11, "test11", "Meeting", "2023-05-30", "07:30", "High", "");
+        Event e2 = new Event(12, "test12", "Presentation", "2023-05-31", "07:30", "High", "");
+
+        List<Event> events = new ArrayList<>();
+        events.add(e);
+        events.add(e2);
+        CustomCalendarCellDecorator decorator = new CustomCalendarCellDecorator(events, datePicker);
+        datePicker.setDecorators(Collections.singletonList(decorator));
+
+        // add a public method named getCalendarPickerView() that returns a reference to the calendarPickerView object
+
         /*
         ArrayList<Date> d = new ArrayList<Date>();
         Date d1 = parseDate("2023-05-28");
@@ -48,7 +60,7 @@ public class CalenderPage extends AppCompatActivity {
         d.add(d3);
         datePicker.highlightDates(d);*/
 
-        // Define a list of dates to highlight
+        /*// Define a list of dates to highlight
         List<Date> datesToHighlight = new ArrayList<>();
         datesToHighlight.add(parseDate("2023-05-28"));
         datesToHighlight.add(parseDate("2023-05-30"));
@@ -58,7 +70,7 @@ public class CalenderPage extends AppCompatActivity {
         CustomCalendarCellDecorator decorator = new CustomCalendarCellDecorator(datesToHighlight);
 
         // Set the custom decorator to the CalendarPickerView
-        datePicker.setDecorators(Collections.singletonList(decorator));
+        datePicker.setDecorators(Collections.singletonList(decorator));*/
 
         navigation.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
@@ -102,4 +114,9 @@ public class CalenderPage extends AppCompatActivity {
             return null;
         }
     }
+
+    public CalendarPickerView getCalendarPickerView() {
+        return datePicker;
+    }
+
 }

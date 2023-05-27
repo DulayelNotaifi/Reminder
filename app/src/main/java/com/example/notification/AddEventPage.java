@@ -27,6 +27,8 @@ import android.widget.Toast;
 
 //import com.squareup.timessquare.CalendarPickerView;
 
+import com.squareup.timessquare.CalendarPickerView;
+
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -149,8 +151,19 @@ public class AddEventPage extends AppCompatActivity implements DatePickerDialog.
 
     private void addEventToCalender() {
 
-
-       CalenderPage p = new CalenderPage();
+            CalenderPage calenderPage = new CalenderPage();
+            // get a reference to the CalendarPickerView object in the CalenderPage class
+            CalendarPickerView calendarPickerView = calenderPage.getCalendarPickerView();
+            if (calendarPickerView != null) {
+                // create a Date object from the EventDate string
+                Date eventDate = new Date(EventDate);
+                // create a list of dates to highlight
+                List<Date> datesToHighlight = new ArrayList<>();
+                datesToHighlight.add(eventDate);
+                // pass the list of dates to the highlightDates() method of the CalendarPickerView object
+                calendarPickerView.highlightDates(datesToHighlight);
+            }
+      /* CalenderPage p = new CalenderPage();
     //   p.hilght();
 
 
@@ -164,7 +177,7 @@ public class AddEventPage extends AppCompatActivity implements DatePickerDialog.
 //        d.add(d3);
 //        datePicker.highlightDates(d);
 //        Toast.makeText(this,""+d.isEmpty(),Toast.LENGTH_SHORT).show();
-//        datePicker.highlightDates(d);
+//        datePicker.highlightDates(d);*/
 
    }//end addEventToCalender
 

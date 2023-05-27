@@ -2,21 +2,64 @@ package com.example.notification;
 import android.graphics.Color;
 import com.squareup.timessquare.CalendarCellDecorator;
 import com.squareup.timessquare.CalendarCellView;
-import java.util.Date;
-import java.util.List;
+import com.squareup.timessquare.CalendarPickerView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 public class CustomCalendarCellDecorator implements CalendarCellDecorator {
 
-    private List<Date> mDatesToHighlight;
+    private List<Event> mEvents;
+    private Map<String, Integer> mColorMap;
+    private CalendarPickerView mCalendarPickerView;
 
-    public CustomCalendarCellDecorator(List<Date> datesToHighlight) {
-        mDatesToHighlight = datesToHighlight;
+    public CustomCalendarCellDecorator(List<Event> events, CalendarPickerView calendarPickerView) {
+        mEvents = events;
+        mColorMap = new HashMap<>();
+        mColorMap.put("Meeting", Color.BLUE);
+        mColorMap.put("Picnic", Color.GREEN);
+        mColorMap.put("Presentation", Color.RED);
+        mColorMap.put("Shopping", Color.YELLOW);
+        mColorMap.put("Family Visit", Color.MAGENTA);
+        mColorMap.put("Study", Color.CYAN);
+        mColorMap.put("Appointment", Color.DKGRAY);
+        mColorMap.put("Eid", Color.BLACK);
+        mColorMap.put("Travel day", Color.GRAY);
+        mColorMap.put("Other", Color.LTGRAY);
+        mCalendarPickerView = calendarPickerView;
     }
 
     @Override
     public void decorate(CalendarCellView cellView, Date date) {
-        if (mDatesToHighlight.contains(date)) {
-            cellView.setBackgroundColor(Color.YELLOW);
+        int color = Color.WHITE;
+        for (Event event : mEvents) {
+            if (isSameDay(date, event.getDate())) {
+                color = mColorMap.get(event.getType()); // replace mColorap with mColorMap
+                break;
+            }
+        }
+        cellView.setBackgroundColor(color);
+        mCalendarPickerView.invalidate();
+    }
+
+    private boolean isSameDay(Date date, String dateString) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date d = dateFormat.parse(dateString);
+            Calendar cal1 = Calendar.getInstance();
+            Calendar cal2 = Calendar.getInstance();
+            cal1.setTime(date);
+            cal2.setTime(d);
+            return cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR) &&
+                    cal1.get(Calendar.MONTH) == cal2.get(Calendar.MONTH) &&
+                    cal1.get(Calendar.DAY_OF_MONTH) == cal2.get(Calendar.DAY_OF_MONTH);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return false;
         }
     }
 }
