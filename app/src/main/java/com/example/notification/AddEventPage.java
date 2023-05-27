@@ -83,8 +83,6 @@ public class AddEventPage extends AppCompatActivity implements DatePickerDialog.
         addEvent = findViewById(R.id.addEvent);
         dateButt = findViewById(R.id.dateOfEvent);
         timeButt = findViewById(R.id.timeOfEvent);
-//        NameOfEvent = eventNameEditText.getText().toString();
-//        NotesOfEvent = eventNotesEditText.getText().toString();
 
 
         //date listener
@@ -113,12 +111,12 @@ public class AddEventPage extends AppCompatActivity implements DatePickerDialog.
                 NameOfEvent = eventNameEditText.getText().toString();
                 NotesOfEvent = eventNotesEditText.getText().toString();
                 addEventToDB();
-              //  addEventToCalender();
                 scheduleNotification() ;
-
             }
         });//end of add event listener
     }//end on Create
+
+
     void scheduleNotification() {
         Intent notificationIntent = new Intent(this.getApplicationContext(), Notif.class);
         //Toast.makeText(getApplicationContext(),this.NameOfEvent,Toast.LENGTH_LONG).show();
@@ -149,50 +147,9 @@ public class AddEventPage extends AppCompatActivity implements DatePickerDialog.
         myDB.addEvent(NameOfEvent,TypeItem,EventDate,EventTime,PeriorityItem,NotesOfEvent);
     }//end addEventToDB
 
-    private void addEventToCalender() {
-
-            CalenderPage calenderPage = new CalenderPage();
-            // get a reference to the CalendarPickerView object in the CalenderPage class
-            CalendarPickerView calendarPickerView = calenderPage.getCalendarPickerView();
-            if (calendarPickerView != null) {
-                // create a Date object from the EventDate string
-                Date eventDate = new Date(EventDate);
-                // create a list of dates to highlight
-                List<Date> datesToHighlight = new ArrayList<>();
-                datesToHighlight.add(eventDate);
-                // pass the list of dates to the highlightDates() method of the CalendarPickerView object
-                calendarPickerView.highlightDates(datesToHighlight);
-            }
-      /* CalenderPage p = new CalenderPage();
-    //   p.hilght();
-
-
-
-//        ArrayList<Date> d = new ArrayList<Date>();
-//        Date d1 = new Date(2023,5,29);
-//        Date d2 = new Date(2023,5,28);
-//        Date d3 = new Date(2023,5,27);
-//        d.add(d1);
-//        d.add(d2);
-//        d.add(d3);
-//        datePicker.highlightDates(d);
-//        Toast.makeText(this,""+d.isEmpty(),Toast.LENGTH_SHORT).show();
-//        datePicker.highlightDates(d);*/
-
-   }//end addEventToCalender
-
-
 
     @Override
     public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-        //format the calender object using the chosen date
-//        Calendar c = Calendar.getInstance();
-//        c.set(Calendar.YEAR,year);
-//        c.set(Calendar.MONTH,month);
-//        c.set(Calendar.DAY_OF_MONTH,day);
-//        cad.set(Calendar.YEAR,year);
-//        cad.set(Calendar.MONTH,month);
-//        cad.set(Calendar.DAY_OF_MONTH,day);
         String monthd ="";
         month = month+1;
         if(month < 10){

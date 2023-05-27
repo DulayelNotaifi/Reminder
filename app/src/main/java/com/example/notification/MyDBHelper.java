@@ -62,7 +62,6 @@ public class MyDBHelper extends SQLiteOpenHelper {
         cv.put(COLUMN_DATE,date);
         cv.put(COLUMN_TIME,time);
         cv.put(COLUMN_PRIORITY,priority);
-
         if(!notes.isEmpty())
         cv.put(COLUMN_NOTES,notes);
         else
@@ -91,7 +90,6 @@ public class MyDBHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         // Iterate over the cursor and retrieve the data for each row
-
         if (cursor.moveToFirst()) {
             do {
                 // Retrieve the data for each column in the current row
