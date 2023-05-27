@@ -5,7 +5,11 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
+import android.app.AlarmManager;
 import android.app.DatePickerDialog;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,7 +25,7 @@ import android.widget.EditText;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import com.squareup.timessquare.CalendarPickerView;
+//import com.squareup.timessquare.CalendarPickerView;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
@@ -32,7 +36,7 @@ import java.util.Iterator;
 import java.util.List;
 
 public class AddEventPage extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener{
-
+    Calendar cad;
     EditText eventNameEditText,eventNotesEditText;
     Button addEvent,dateButt,timeButt;
 
@@ -47,7 +51,9 @@ public class AddEventPage extends AppCompatActivity implements DatePickerDialog.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_2);
-
+        //for noti
+        cad=Calendar.getInstance();
+        createNotificationChannel();
          //Setup Priority dropDown Menu
         Periorityauto = findViewById(R.id.auto1);
         Periorityadaptor = new ArrayAdapter<String>(this,R.layout.per_items,periorityItems);
@@ -75,8 +81,8 @@ public class AddEventPage extends AppCompatActivity implements DatePickerDialog.
         addEvent = findViewById(R.id.addEvent);
         dateButt = findViewById(R.id.dateOfEvent);
         timeButt = findViewById(R.id.timeOfEvent);
-        NameOfEvent = eventNameEditText.getText().toString();
-        NotesOfEvent = eventNotesEditText.getText().toString();
+        //NameOfEvent = eventNameEditText.getText().toString();
+        //NotesOfEvent = eventNotesEditText.getText().toString();
 
 
         //date listener
@@ -102,12 +108,40 @@ public class AddEventPage extends AppCompatActivity implements DatePickerDialog.
         addEvent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               addEventToDB();
+                NameOfEvent = eventNameEditText.getText().toString();
+                NotesOfEvent = eventNotesEditText.getText().toString();
+                addEventToDB();
                 addEventToCalender();
+                scheduleNotification() ;
+
             }
         });//end of add event listener
     }//end on Create
+    void scheduleNotification() {
+        Intent notificationIntent = new Intent(this.getApplicationContext(), Notif.class);
+        //Toast.makeText(getApplicationContext(),this.NameOfEvent,Toast.LENGTH_LONG).show();
+        notificationIntent.putExtra("title",NameOfEvent);
+        notificationIntent.putExtra("message","this is a remainder that your event is comming in "+"3 minutes");/////////////////////////////////////////////////////
+        //Toast.makeText(getApplicationContext(),this.NameOfEvent,Toast.LENGTH_LONG).show();
+        PendingIntent pi = PendingIntent.getBroadcast(this, 0,
+                notificationIntent, PendingIntent.FLAG_MUTABLE//FLAG_UPDATE_CURRENT
+        );//getActivity
+        AlarmManager am=(AlarmManager)getSystemService(ALARM_SERVICE);
+        long time=getTime();
+        long timeRem=getTime(1);/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        am.set(AlarmManager. RTC_WAKEUP , time , pi) ;
+        //Toast.makeText(getApplicationContext(),"4",Toast.LENGTH_LONG).show();
+        //
+        }
+    long getTime(){
+        return cad.getTimeInMillis();
 
+    }
+    long getTime(int mins){
+        cad.add(Calendar.MINUTE, -1*mins);
+        return cad.getTimeInMillis();
+
+    }
     private void addEventToDB() {
         MyDBHelper myDB = new MyDBHelper(AddEventPage.this);
         myDB.addEvent(NameOfEvent,TypeItem,EventDate,EventTime,PeriorityItem,NotesOfEvent);
@@ -143,7 +177,9 @@ public class AddEventPage extends AppCompatActivity implements DatePickerDialog.
         c.set(Calendar.YEAR,year);
         c.set(Calendar.MONTH,month);
         c.set(Calendar.DAY_OF_MONTH,day);
-
+        cad.set(Calendar.YEAR,year);
+        cad.set(Calendar.MONTH,month);
+        cad.set(Calendar.DAY_OF_MONTH,day);
         EventDate = DateFormat.getDateInstance().format(c.getTime());
     }//end onDateSet
 
@@ -154,11 +190,19 @@ public class AddEventPage extends AppCompatActivity implements DatePickerDialog.
         Calendar datetime = Calendar.getInstance();
         datetime.set(Calendar.HOUR_OF_DAY, h);
         datetime.set(Calendar.MINUTE, m);
+        cad.set(Calendar.HOUR_OF_DAY, h);
+        cad.set(Calendar.MINUTE, m);
 
         if (datetime.get(Calendar.AM_PM) == Calendar.AM)
             am_pm = "AM";
         else if (datetime.get(Calendar.AM_PM) == Calendar.PM)
             am_pm = "PM";
         EventTime = h +":"+m +" " +am_pm;
+    }
+    private void createNotificationChannel(){
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+        NotificationChannel nc= new NotificationChannel("chan1", "chan1", NotificationManager.IMPORTANCE_DEFAULT);
+        NotificationManager nm=( NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        nm.createNotificationChannel(nc);}
     }
 }
