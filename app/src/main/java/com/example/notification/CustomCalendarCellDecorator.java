@@ -20,16 +20,16 @@ public class CustomCalendarCellDecorator implements CalendarCellDecorator {
     public CustomCalendarCellDecorator(List<Event> events, CalendarPickerView calendarPickerView) {
         mEvents = events;
         mColorMap = new HashMap<>();
-        mColorMap.put("Meeting", Color.alpha(7188));
+        mColorMap.put("Meeting", Color.BLUE);
         mColorMap.put("Picnic", Color.GREEN);
-        mColorMap.put("Presentation", Color.rgb(2,9,8));
-        mColorMap.put("Shopping",Color.rgb(20,10,44));
-        mColorMap.put("Family Visit",Color.alpha(810));
-        mColorMap.put("Study", R.color.StudyColor);
-        mColorMap.put("Appointment", R.color.AppointmentColor);
-        mColorMap.put("Eid", R.color.EidColor);
-        mColorMap.put("Travel day", R.color.TraveldayColor);
-        mColorMap.put("Other",R.color.OtherColor);
+        mColorMap.put("Presentation", Color.CYAN);
+        mColorMap.put("Shopping",Color.DKGRAY);
+        mColorMap.put("Family Visit",Color.YELLOW);
+        mColorMap.put("Study",Color.LTGRAY);
+        mColorMap.put("Appointment",Color.RED);
+        mColorMap.put("Eid", Color.MAGENTA);
+        mColorMap.put("Travel day", Color.GRAY);
+        mColorMap.put("Other",Color.TRANSPARENT);
         mCalendarPickerView = calendarPickerView;
     }
 
