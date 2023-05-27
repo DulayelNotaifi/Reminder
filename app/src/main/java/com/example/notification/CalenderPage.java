@@ -17,7 +17,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 
 public class CalenderPage extends AppCompatActivity {
 
@@ -36,6 +38,7 @@ public class CalenderPage extends AppCompatActivity {
 
         datePicker = findViewById(R.id.calendar);
         datePicker.init(today, nextYear.getTime()).withSelectedDate(today);
+        /*
         ArrayList<Date> d = new ArrayList<Date>();
         Date d1 = parseDate("2023-05-28");
         Date d2 = parseDate("2023-05-30");
@@ -43,7 +46,19 @@ public class CalenderPage extends AppCompatActivity {
         d.add(d1);
         d.add(d2);
         d.add(d3);
-        datePicker.highlightDates(d);
+        datePicker.highlightDates(d);*/
+
+        // Define a list of dates to highlight
+        List<Date> datesToHighlight = new ArrayList<>();
+        datesToHighlight.add(parseDate("2023-05-28"));
+        datesToHighlight.add(parseDate("2023-05-30"));
+        datesToHighlight.add(parseDate("2023-05-31"));
+
+        // Create a custom decorator to highlight thedates
+        CustomCalendarCellDecorator decorator = new CustomCalendarCellDecorator(datesToHighlight);
+
+        // Set the custom decorator to the CalendarPickerView
+        datePicker.setDecorators(Collections.singletonList(decorator));
 
         navigation.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
