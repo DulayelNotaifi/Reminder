@@ -44,7 +44,8 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <Button
+
+    <androidx.appcompat.widget.AppCompatButton
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:id="@+id/buttonCancel"
@@ -53,13 +54,14 @@
         android:layout_marginEnd="5dp"
         android:text="Cancel"
         android:textColor="#FFFFFF"
-        android:textSize="12sp"
+        android:textSize="13sp"
         app:layout_constraintBottom_toBottomOf="@id/layoutDialog"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/buttonConfirm"
         app:layout_constraintTop_toBottomOf="@id/layoutDialog"/>
 
-    <Button
+
+    <androidx.appcompat.widget.AppCompatButton
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:id="@+id/buttonConfirm"
@@ -68,13 +70,14 @@
         android:background="@drawable/confirm_button_background"
         android:text="Confirm"
         android:textColor="#FFFFFF"
-        android:textSize="12dp"
+        android:textSize="13sp"
         app:layout_constraintBottom_toBottomOf="@id/layoutDialog"
         app:layout_constraintEnd_toStartOf="@+id/buttonDismiss"
         app:layout_constraintStart_toEndOf="@id/buttonCancel"
         app:layout_constraintTop_toBottomOf="@id/layoutDialog"/>
 
-    <Button
+
+    <androidx.appcompat.widget.AppCompatButton
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:id="@+id/buttonDismiss"
@@ -83,7 +86,7 @@
         android:background="@drawable/dismiss_button_background"
         android:text="Dismiss"
         android:textColor="#FFFFFF"
-        android:textSize="12sp"
+        android:textSize="13sp"
         app:layout_constraintBottom_toBottomOf="@id/layoutDialog"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/buttonConfirm"
