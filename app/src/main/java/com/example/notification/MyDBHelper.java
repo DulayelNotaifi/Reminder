@@ -137,4 +137,9 @@ public class MyDBHelper extends SQLiteOpenHelper {
         }//end if
      return events;
     }
+    public void deleteEvent(int idNum) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        db.delete(TABLE_NAME, COLUMN_ID + "=" + idNum, null);
+        db.close();
+    }
 }

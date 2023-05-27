@@ -88,7 +88,7 @@ private void getClosestEvents(){
         closestEvent1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showWarningDialog(closestEvents.get(0).getName(), closestEvents.get(0).getType(), closestEvents.get(0).getDate(), closestEvents.get(0).getTime(), closestEvents.get(0).getPriority(), closestEvents.get(0).getNotes());
+                showWarningDialog(closestEvents.get(0).getId(),closestEvents.get(0).getName(), closestEvents.get(0).getType(), closestEvents.get(0).getDate(), closestEvents.get(0).getTime(), closestEvents.get(0).getPriority(), closestEvents.get(0).getNotes());
             }
         });
     }
@@ -97,7 +97,7 @@ private void getClosestEvents(){
         closestEvent2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showWarningDialog(closestEvents.get(1).getName(), closestEvents.get(1).getType(), closestEvents.get(1).getDate(), closestEvents.get(1).getTime(), closestEvents.get(1).getPriority(), closestEvents.get(1).getNotes());
+                showWarningDialog(closestEvents.get(1).getId(),closestEvents.get(1).getName(), closestEvents.get(1).getType(), closestEvents.get(1).getDate(), closestEvents.get(1).getTime(), closestEvents.get(1).getPriority(), closestEvents.get(1).getNotes());
             }
         });
     }
@@ -106,7 +106,7 @@ private void getClosestEvents(){
         closestEvent3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showWarningDialog(closestEvents.get(2).getName(), closestEvents.get(2).getType(), closestEvents.get(2).getDate(), closestEvents.get(2).getTime(), closestEvents.get(2).getPriority(), closestEvents.get(2).getNotes());
+                showWarningDialog(closestEvents.get(2).getId(),closestEvents.get(2).getName(), closestEvents.get(2).getType(), closestEvents.get(2).getDate(), closestEvents.get(2).getTime(), closestEvents.get(2).getPriority(), closestEvents.get(2).getNotes());
             }
         });
     }
@@ -115,7 +115,7 @@ private void getClosestEvents(){
         closestEvent4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showWarningDialog(closestEvents.get(3).getName(), closestEvents.get(3).getType(), closestEvents.get(3).getDate(), closestEvents.get(3).getTime(), closestEvents.get(3).getPriority(), closestEvents.get(3).getNotes());
+                showWarningDialog(closestEvents.get(3).getId(),closestEvents.get(3).getName(), closestEvents.get(3).getType(), closestEvents.get(3).getDate(), closestEvents.get(3).getTime(), closestEvents.get(3).getPriority(), closestEvents.get(3).getNotes());
             }
         });
     }
@@ -124,7 +124,7 @@ private void getClosestEvents(){
         closestEvent5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showWarningDialog(closestEvents.get(4).getName(), closestEvents.get(4).getType(), closestEvents.get(4).getDate(), closestEvents.get(4).getTime(), closestEvents.get(4).getPriority(), closestEvents.get(4).getNotes());
+                showWarningDialog(closestEvents.get(4).getId(),closestEvents.get(4).getName(), closestEvents.get(4).getType(), closestEvents.get(4).getDate(), closestEvents.get(4).getTime(), closestEvents.get(4).getPriority(), closestEvents.get(4).getNotes());
             }
         });
     }
@@ -139,7 +139,7 @@ private void getClosestEvents(){
         Intent intent=new Intent(this, AddEventPage.class);
         startActivity(intent);
     }
-    private void showWarningDialog(String name, String type, String date, String time, String priority, String notes){
+    private void showWarningDialog(int id, String name, String type, String date, String time, String priority, String notes){
         AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AlertDialogTheme);
         View view = LayoutInflater.from(this).inflate(
                 R.layout.alert_ui,
@@ -151,7 +151,7 @@ private void getClosestEvents(){
 
 
         final AlertDialog alertDialog = builder.create();
-
+        MyDBHelper dbHelper = new MyDBHelper(this);
         view.findViewById(R.id.buttonConfirm).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -163,7 +163,7 @@ private void getClosestEvents(){
         view.findViewById(R.id.buttonCancel).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                alertDialog.dismiss(); //delete query
+                dbHelper.deleteEvent(id);
 
             }
         });
