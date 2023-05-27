@@ -83,8 +83,8 @@ public class AddEventPage extends AppCompatActivity implements DatePickerDialog.
         addEvent = findViewById(R.id.addEvent);
         dateButt = findViewById(R.id.dateOfEvent);
         timeButt = findViewById(R.id.timeOfEvent);
-        //NameOfEvent = eventNameEditText.getText().toString();
-        //NotesOfEvent = eventNotesEditText.getText().toString();
+        NameOfEvent = eventNameEditText.getText().toString();
+        NotesOfEvent = eventNotesEditText.getText().toString();
 
 
         //date listener
