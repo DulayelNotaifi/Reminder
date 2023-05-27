@@ -23,7 +23,7 @@ import com.google.android.material.navigation.NavigationBarView;
 
 public class ClosestEvents extends AppCompatActivity {
 
-    private Button button,viewCalendar;
+    private Button button;
     BottomNavigationView navigation;
 
     @Override
@@ -31,8 +31,6 @@ public class ClosestEvents extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_1);
         button=(Button) findViewById(R.id.appCompatButton);
-
-
         navigation = findViewById(R.id.nav);
 
         button.setOnClickListener(new View.OnClickListener() {
