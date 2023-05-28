@@ -32,7 +32,7 @@ import android.widget.Toast;
 
 //import com.squareup.timessquare.CalendarPickerView;
 
-import com.squareup.timessquare.CalendarPickerView;
+//import com.squareup.timessquare.CalendarPickerView;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
@@ -43,7 +43,7 @@ import java.util.Iterator;
 import java.util.List;
 
 public class AddEventPage extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener{
-    Calendar cad;
+    Calendar cad,rem;
     EditText eventNameEditText,eventNotesEditText;
     Button addEvent,dateButt,timeButt;
 
@@ -56,12 +56,17 @@ public class AddEventPage extends AppCompatActivity implements DatePickerDialog.
     String[] remindItems = {"10 min","15 min","20 min","25 min","30 min","35 min","40 min","45 min","50 min","60 min","120 min"};
     AutoCompleteTextView Periorityauto,Typesauto,reminauto;
     ArrayAdapter<String> Periorityadaptor,Typesadaptor,remindadaptor;
+    private int year;
+    private int month;
+    private int day;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_2);
         //for noti
         cad=Calendar.getInstance();
+        rem=Calendar.getInstance();
         createNotificationChannel();
 
 
@@ -145,18 +150,38 @@ public class AddEventPage extends AppCompatActivity implements DatePickerDialog.
 
 
     void scheduleNotification() {
+        cad.set(Calendar.SECOND,0);
+        rem.set(Calendar.SECOND,0);
         Intent notificationIntent = new Intent(this.getApplicationContext(), Notif.class);
         //Toast.makeText(getApplicationContext(),this.NameOfEvent,Toast.LENGTH_LONG).show();
-        notificationIntent.putExtra("title",NameOfEvent);
-        notificationIntent.putExtra("message","this is a remainder that your event is comming in "+"3 minutes");/////////////////////////////////////////////////////
+        notificationIntent.putExtra("title","your "+NameOfEvent+" event starts now");
+        notificationIntent.putExtra("message","for more info");/////////////////////////////////////////////////////
         //Toast.makeText(getApplicationContext(),this.NameOfEvent,Toast.LENGTH_LONG).show();
         PendingIntent pi = PendingIntent.getBroadcast(this, 0,
                 notificationIntent, PendingIntent.FLAG_MUTABLE//FLAG_UPDATE_CURRENT
         );//getActivity
         AlarmManager am=(AlarmManager)getSystemService(ALARM_SERVICE);
         long time=getTime();
-        long timeRem=getTime(1);/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        Toast.makeText(getApplicationContext(),cad.getTime()+"cad",Toast.LENGTH_LONG).show();
+
         am.set(AlarmManager. RTC_WAKEUP , time , pi) ;
+
+
+
+        Intent remIntent = new Intent(this.getApplicationContext(), rem.class);
+        //Toast.makeText(getApplicationContext(),this.NameOfEvent,Toast.LENGTH_LONG).show();
+        remIntent.putExtra("title","this is a reminder your "+NameOfEvent+" event starts in "+RemindItem);
+        remIntent.putExtra("message","for more info");/////////////////////////////////////////////////////
+        //Toast.makeText(getApplicationContext(),this.NameOfEvent,Toast.LENGTH_LONG).show();
+        PendingIntent ri = PendingIntent.getBroadcast(this, 0,
+                remIntent, PendingIntent.FLAG_MUTABLE//FLAG_UPDATE_CURRENT
+        );//getActivity
+        getTime(Integer.parseInt(RemindItem.substring(0,RemindItem.indexOf(" "))));/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        long timeRem=rem.getTimeInMillis();
+        Toast.makeText(getApplicationContext(),rem.getTime()+"rem",Toast.LENGTH_LONG).show();
+        AlarmManager rm=(AlarmManager)getSystemService(ALARM_SERVICE);
+        //Toast.makeText(getApplicationContext(),RemindItem.substring(0,RemindItem.indexOf(" "))+"this is",Toast.LENGTH_LONG).show();
+        rm.set(AlarmManager. RTC_WAKEUP , timeRem , ri) ;
         //Toast.makeText(getApplicationContext(),"4",Toast.LENGTH_LONG).show();
         //
         }
@@ -165,9 +190,8 @@ public class AddEventPage extends AppCompatActivity implements DatePickerDialog.
 
     }
     long getTime(int mins){
-        cad.add(Calendar.MINUTE, -1*mins);
-        return cad.getTimeInMillis();
-
+        rem.add(Calendar.MINUTE, -1*mins);
+        return rem.getTimeInMillis();
     }
     private void addEventToDB() {
         MyDBHelper myDB = new MyDBHelper(AddEventPage.this);
@@ -177,6 +201,12 @@ public class AddEventPage extends AppCompatActivity implements DatePickerDialog.
 
     @Override
     public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+        cad.set(Calendar.YEAR,year);
+        cad.set(Calendar.MONTH,month);
+        cad.set(Calendar.DAY_OF_MONTH,day);
+        rem.set(Calendar.YEAR,year);
+        rem.set(Calendar.MONTH,month);
+        rem.set(Calendar.DAY_OF_MONTH,day);
         String monthd ="";
         month = month+1;
         if(month < 10){
@@ -187,6 +217,7 @@ public class AddEventPage extends AppCompatActivity implements DatePickerDialog.
         }
         String date = ""+year +"-"+monthd+"-"+day;
         EventDate = date;
+
     }//end onDateSet
 
     @Override
@@ -198,6 +229,8 @@ public class AddEventPage extends AppCompatActivity implements DatePickerDialog.
         datetime.set(Calendar.MINUTE, m);
         cad.set(Calendar.HOUR_OF_DAY, h);
         cad.set(Calendar.MINUTE, m);
+        rem.set(Calendar.HOUR_OF_DAY, h);
+        rem.set(Calendar.MINUTE, m);
 
         if (datetime.get(Calendar.AM_PM) == Calendar.AM)
             am_pm = "AM";
