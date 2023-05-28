@@ -9,8 +9,13 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MyDBHelper extends SQLiteOpenHelper {
 
@@ -149,5 +154,26 @@ public class MyDBHelper extends SQLiteOpenHelper {
     void deleteAllData(){
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("DELETE FROM " + TABLE_NAME);
+    }
+
+    public String eventsOfDate(Date d){
+
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+        String strDate = dateFormat.format(d);
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        String selectQuery = "SELECT "+COLUMN_NAME+", "+ COLUMN_TIME+" FROM " + TABLE_NAME + " WHERE " + COLUMN_DATE + "=" +strDate;
+
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        String result = "";
+
+        if(cursor.moveToFirst()){
+            do{
+               result += cursor.getString(0);
+                result += cursor.getString(1) ;
+                result += "\n";
+            }while (cursor.moveToNext());
+        }
+       return result;
     }
 }
