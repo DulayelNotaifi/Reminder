@@ -43,6 +43,7 @@ public class CustomCalendarCellDecorator implements CalendarCellDecorator {
             }
         }
         cellView.setBackgroundColor(color);
+        //cellView.getDayOfMonthTextView().setTextColor(Color.GRAY); if we want 
         mCalendarPickerView.invalidate();
     }
 
