@@ -239,11 +239,25 @@ public class AddEventPage extends AppCompatActivity implements DatePickerDialog.
         rem.set(Calendar.HOUR_OF_DAY, h);
         rem.set(Calendar.MINUTE, m);
 
+        String h2 = "";
+        if(h < 10){
+            h2 = "0"+h;
+        }
+        else{
+            h2 = ""+h;
+        }
+        String m2 = "";
+        if(m < 10){
+            m2 = "0"+m;
+        }
+        else{
+            m2 = ""+m;
+        }
         if (datetime.get(Calendar.AM_PM) == Calendar.AM)
             am_pm = "AM";
         else if (datetime.get(Calendar.AM_PM) == Calendar.PM)
             am_pm = "PM";
-        EventTime = h +":"+m +" " +am_pm;
+        EventTime = h2 +":"+m2 +" " +am_pm;
     }
     private void createNotificationChannel(){
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
