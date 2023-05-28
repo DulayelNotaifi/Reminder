@@ -219,6 +219,7 @@ public class AddEventPage extends AppCompatActivity implements DatePickerDialog.
         if(day < 10){
             singleDay = "0"+day;
         }
+        else{
             singleDay = ""+day;
         }
         String date = ""+year +"-"+monthd+"-"+singleDay;
