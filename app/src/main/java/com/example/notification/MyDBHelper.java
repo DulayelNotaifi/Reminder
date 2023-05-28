@@ -164,8 +164,7 @@ public class MyDBHelper extends SQLiteOpenHelper {
         String strDate = dateFormat.format(d);
 
         // Define the SQL query to retrieve the event name and time for the specified date
-        String selectQuery = "SELECT " + COLUMN_NAME + ", " + COLUMN_TIME + " FROM " + TABLE_NAME + " WHERE " + COLUMN_DATE + "='" + strDate + "'";
-
+        String selectQuery = "SELECT " + COLUMN_NAME + ", " + COLUMN_TIME + " FROM " + TABLE_NAME + " WHERE " + COLUMN_DATE + "='" + strDate + "' ORDER BY " + COLUMN_TIME + " ASC";
         // Execute the query and retrieve the resulting cursor
         Cursor cursor = db.rawQuery(selectQuery, null);
 
