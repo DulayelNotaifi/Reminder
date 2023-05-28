@@ -79,8 +79,8 @@ public class CalenderPage extends AppCompatActivity {
            String myevents = helper.eventsOfDate(date);
 
 
-                    ((TextView) view.findViewById(R.id.txTitle)).setText(myevents);
-                ((TextView) view.findViewById(R.id.txMessage)).setText("evtimes");
+                    ((TextView) view.findViewById(R.id.txTitle)).setText("Events");
+                ((TextView) view.findViewById(R.id.txMessage)).setText(myevents);
                 final AlertDialog alertDialog = builder.create();
             //    MyDBHelper dbHelper = new MyDBHelper(context);
 

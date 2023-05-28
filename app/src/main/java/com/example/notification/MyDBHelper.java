@@ -158,22 +158,35 @@ public class MyDBHelper extends SQLiteOpenHelper {
 
     public String eventsOfDate(Date d){
 
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        // Format the date to match the format used in the database
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String strDate = dateFormat.format(d);
 
-        SQLiteDatabase db = this.getReadableDatabase();
-        String selectQuery = "SELECT "+COLUMN_NAME+", "+ COLUMN_TIME+" FROM " + TABLE_NAME + " WHERE " + COLUMN_DATE + "=" +strDate;
+        // Define the SQL query to retrieve the event name and time for the specified date
+        String selectQuery = "SELECT " + COLUMN_NAME + ", " + COLUMN_TIME + " FROM " + TABLE_NAME + " WHERE " + COLUMN_DATE + "='" + strDate + "'";
 
+        // Execute the query and retrieve the resulting cursor
         Cursor cursor = db.rawQuery(selectQuery, null);
-        String result = "";
 
+        // Initialize a string to hold the results
+        StringBuilder result = new StringBuilder();
+
+        // Iterate over the cursor and retrieve the event name and time for each row
         if(cursor.moveToFirst()){
             do{
-               result += cursor.getString(0);
-                result += cursor.getString(1) ;
-                result += "\n";
+                result.append(cursor.getString(0));
+                result.append(" at ");
+                result.append(cursor.getString(1));
+                result.append("\n");
             }while (cursor.moveToNext());
         }
-       return result;
+
+        // Close the cursor and the database connection
+        cursor.close();
+        db.close();
+
+        return result.toString();
     }
 }
