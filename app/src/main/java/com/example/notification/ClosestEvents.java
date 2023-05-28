@@ -164,6 +164,7 @@ private void getClosestEvents(){
             @Override
             public void onClick(View view) {
                 dbHelper.deleteEvent(id);
+                alertDialog.dismiss();
 
             }
         });
