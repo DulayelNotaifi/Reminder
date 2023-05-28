@@ -235,7 +235,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:inputType="none"
-                android:text="Meeting" />
+                android:text="10 min" />
 
         </com.google.android.material.textfield.TextInputLayout>
         <TextView

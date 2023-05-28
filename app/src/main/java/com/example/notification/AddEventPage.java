@@ -47,13 +47,15 @@ public class AddEventPage extends AppCompatActivity implements DatePickerDialog.
     EditText eventNameEditText,eventNotesEditText;
     Button addEvent,dateButt,timeButt;
 
-    String NameOfEvent,NotesOfEvent,EventDate,EventTime,PeriorityItem,TypeItem;
+    String NameOfEvent,NotesOfEvent,EventDate,EventTime,PeriorityItem,TypeItem,RemindItem;
 
     String[] periorityItems = {"High","Medium","Low"};
     String[] typeItems = {"Meeting","Picnic","Presentation","Shopping","Family Visit","Study",
             "Appointment","Eid","Travel day","Other"};
-    AutoCompleteTextView Periorityauto,Typesauto;
-    ArrayAdapter<String> Periorityadaptor,Typesadaptor;
+
+    String[] remindItems = {"10 min","15 min","20 min","25 min","30 min","35 min","40 min","45 min","50 min","60 min","120 min"};
+    AutoCompleteTextView Periorityauto,Typesauto,reminauto;
+    ArrayAdapter<String> Periorityadaptor,Typesadaptor,remindadaptor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +63,8 @@ public class AddEventPage extends AppCompatActivity implements DatePickerDialog.
         //for noti
         cad=Calendar.getInstance();
         createNotificationChannel();
+
+
          //Setup Priority dropDown Menu
         Periorityauto = findViewById(R.id.auto1);
         Periorityadaptor = new ArrayAdapter<String>(this,R.layout.per_items,periorityItems);
@@ -82,6 +86,19 @@ public class AddEventPage extends AppCompatActivity implements DatePickerDialog.
                 TypeItem = adapterView.getItemAtPosition(i).toString();
             }
         });
+
+        //setup Remind dropDown Menu
+        reminauto = findViewById(R.id.auto3);
+        remindadaptor = new ArrayAdapter<String>(this,R.layout.alert_items,remindItems);
+        reminauto.setAdapter(remindadaptor);
+
+        reminauto.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                RemindItem = adapterView.getItemAtPosition(i).toString();
+            }
+        });
+
 
         eventNameEditText = findViewById(R.id.nameOfEvent);
         eventNotesEditText = findViewById(R.id.tasksOfEvent);
