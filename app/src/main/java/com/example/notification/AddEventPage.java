@@ -162,7 +162,7 @@ public class AddEventPage extends AppCompatActivity implements DatePickerDialog.
         );//getActivity
         AlarmManager am=(AlarmManager)getSystemService(ALARM_SERVICE);
         long time=getTime();
-        Toast.makeText(getApplicationContext(),cad.getTime()+"cad",Toast.LENGTH_LONG).show();
+        //Toast.makeText(getApplicationContext(),cad.getTime()+"cad",Toast.LENGTH_LONG).show();
 
         am.set(AlarmManager. RTC_WAKEUP , time , pi) ;
 
@@ -178,7 +178,7 @@ public class AddEventPage extends AppCompatActivity implements DatePickerDialog.
         );//getActivity
         getTime(Integer.parseInt(RemindItem.substring(0,RemindItem.indexOf(" "))));/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         long timeRem=rem.getTimeInMillis();
-        Toast.makeText(getApplicationContext(),rem.getTime()+"rem",Toast.LENGTH_LONG).show();
+        //Toast.makeText(getApplicationContext(),rem.getTime()+"rem",Toast.LENGTH_LONG).show();
         AlarmManager rm=(AlarmManager)getSystemService(ALARM_SERVICE);
         //Toast.makeText(getApplicationContext(),RemindItem.substring(0,RemindItem.indexOf(" "))+"this is",Toast.LENGTH_LONG).show();
         rm.set(AlarmManager. RTC_WAKEUP , timeRem , ri) ;
