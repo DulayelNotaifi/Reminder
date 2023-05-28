@@ -86,8 +86,7 @@ public class MyDBHelper extends SQLiteOpenHelper {
         List<Event> events = new ArrayList<>();
 
         // Define the SQL query to retrieve the closest 5 events based on the date
-        String selectQuery = "SELECT * FROM " + TABLE_NAME + " WHERE " + COLUMN_DATE + " >= date('now') ORDER BY " + COLUMN_DATE + " ASC LIMIT 5";
-
+        String selectQuery = "SELECT * FROM " + TABLE_NAME + " WHERE " + COLUMN_DATE + " >= date('now') ORDER BY " + COLUMN_DATE + " ASC, " + COLUMN_TIME + " ASC LIMIT 5";
         // Open a connection to the database
         SQLiteDatabase db = this.getReadableDatabase();
 
