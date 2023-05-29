@@ -143,8 +143,32 @@ public class AddEventPage extends AppCompatActivity implements DatePickerDialog.
             public void onClick(View view) {
                 NameOfEvent = eventNameEditText.getText().toString();
                 NotesOfEvent = eventNotesEditText.getText().toString();
-                if(NameOfEvent==null||NotesOfEvent==null||EventDate==null||EventTime==null||PeriorityItem==null||TypeItem==null)
-                    showWarningDialog("Please fill all the required fields");
+                //Missing field validation
+                String missingFields="";
+                if(NameOfEvent.isEmpty()||NameOfEvent.equals(" ") || NameOfEvent.equals("")|| NotesOfEvent.isEmpty()||NotesOfEvent.equals(" ") || NotesOfEvent.equals("")||EventDate==null||EventTime==null||PeriorityItem==null||TypeItem==null || RemindItem==null) {
+                    if(NameOfEvent.isEmpty()||NameOfEvent.equals(" ") || NameOfEvent.equals("") )
+                        missingFields="Name\n";
+                    if(TypeItem==null){
+                        missingFields+="Type\n";
+                    }
+                    if(PeriorityItem==null){
+                        missingFields+="Priority\n";
+                    }
+                    if(EventDate==null){
+                        missingFields+="Date\n";
+                    }
+                    if(EventTime==null){
+                        missingFields+="Time\n";
+                    }
+                    if(RemindItem==null){
+                        missingFields+="Reminder\n";
+                    }
+                    if(NotesOfEvent.isEmpty()||NotesOfEvent.equals(" ") || NotesOfEvent.equals(""))
+                        missingFields+="Tasks/Notes\n";
+
+                    showWarningDialog("Please fill all the missing field:\n" + missingFields);
+                }
+
                 else {
                     addEventToDB();
                     //  addEventToCalender();
@@ -217,7 +241,7 @@ public class AddEventPage extends AppCompatActivity implements DatePickerDialog.
         deIntent.putExtra("eventTime",EventTime);
         deIntent.putExtra("Priority",PeriorityItem);
         deIntent.putExtra("Type",TypeItem);
-        
+
         /////
 
 
