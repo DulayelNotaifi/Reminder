@@ -107,6 +107,7 @@ public class MyDBHelper extends SQLiteOpenHelper {
                 String time = cursor.getString(4);
                 String priority = cursor.getString(5);
                 String notes = cursor.getString(6);
+                String remindTime = cursor.getString(7);
 
                 // Create a new Event object with the retrieved data and add it to the list
                 Event event = new Event(id, name, type, date,time, priority, notes);

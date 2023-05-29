@@ -198,22 +198,16 @@ public class AddEventPage extends AppCompatActivity implements DatePickerDialog.
             }
         });
 
-       // Get event info from intent extras
-        String eventName = intent.getStringExtra("name");
+       // Get event info from intent extras and Populate views with event info
+        eventNameEditText.setText(intent.getStringExtra("name"));
         Typesauto.setText(intent.getStringExtra("type"));
         Periorityauto.setText(intent.getStringExtra("priority"));
-       // reminauto.setText();
+        reminauto.setText(intent.getStringExtra("remindTime"));
+        eventNotesEditText.setText(intent.getStringExtra("notes"));
+
         String eventDate = intent.getStringExtra("date");
         String eventTime = intent.getStringExtra("time");
-        String eventNotes = intent.getStringExtra("notes");
 
-// Populate views with event info
-        eventNameEditText.setText(eventName);
-        /* eventTypeEditText.setText(eventType);
-        eventDateEditText.setText(eventDate);
-        eventTimeEditText.setText(eventTime);
-        eventPriorityEditText.setText(eventPriority);*/
-        eventNotesEditText.setText(eventNotes);
     }//end on Create
 
 

@@ -88,7 +88,7 @@ private void getClosestEvents(){
         closestEvent1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showWarningDialog(closestEvents.get(0).getId(),closestEvents.get(0).getName(), closestEvents.get(0).getType(), closestEvents.get(0).getDate(), closestEvents.get(0).getTime(), closestEvents.get(0).getPriority(), closestEvents.get(0).getNotes());
+                showWarningDialog(closestEvents.get(0).getId(),closestEvents.get(0).getName(), closestEvents.get(0).getType(), closestEvents.get(0).getDate(), closestEvents.get(0).getTime(), closestEvents.get(0).getPriority(), closestEvents.get(0).getNotes(), closestEvents.get(0).getRemindTime());
             }
         });
     }
@@ -97,7 +97,7 @@ private void getClosestEvents(){
         closestEvent2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showWarningDialog(closestEvents.get(1).getId(),closestEvents.get(1).getName(), closestEvents.get(1).getType(), closestEvents.get(1).getDate(), closestEvents.get(1).getTime(), closestEvents.get(1).getPriority(), closestEvents.get(1).getNotes());
+                showWarningDialog(closestEvents.get(1).getId(),closestEvents.get(1).getName(), closestEvents.get(1).getType(), closestEvents.get(1).getDate(), closestEvents.get(1).getTime(), closestEvents.get(1).getPriority(), closestEvents.get(1).getNotes(), closestEvents.get(1).getRemindTime());
             }
         });
     }
@@ -106,7 +106,7 @@ private void getClosestEvents(){
         closestEvent3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showWarningDialog(closestEvents.get(2).getId(),closestEvents.get(2).getName(), closestEvents.get(2).getType(), closestEvents.get(2).getDate(), closestEvents.get(2).getTime(), closestEvents.get(2).getPriority(), closestEvents.get(2).getNotes());
+                showWarningDialog(closestEvents.get(2).getId(),closestEvents.get(2).getName(), closestEvents.get(2).getType(), closestEvents.get(2).getDate(), closestEvents.get(2).getTime(), closestEvents.get(2).getPriority(), closestEvents.get(2).getNotes(), closestEvents.get(2).getRemindTime());
             }
         });
     }
@@ -115,7 +115,7 @@ private void getClosestEvents(){
         closestEvent4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showWarningDialog(closestEvents.get(3).getId(),closestEvents.get(3).getName(), closestEvents.get(3).getType(), closestEvents.get(3).getDate(), closestEvents.get(3).getTime(), closestEvents.get(3).getPriority(), closestEvents.get(3).getNotes());
+                showWarningDialog(closestEvents.get(3).getId(),closestEvents.get(3).getName(), closestEvents.get(3).getType(), closestEvents.get(3).getDate(), closestEvents.get(3).getTime(), closestEvents.get(3).getPriority(), closestEvents.get(3).getNotes(), closestEvents.get(3).getRemindTime());
             }
         });
     }
@@ -124,7 +124,7 @@ private void getClosestEvents(){
         closestEvent5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showWarningDialog(closestEvents.get(4).getId(),closestEvents.get(4).getName(), closestEvents.get(4).getType(), closestEvents.get(4).getDate(), closestEvents.get(4).getTime(), closestEvents.get(4).getPriority(), closestEvents.get(4).getNotes());
+                showWarningDialog(closestEvents.get(4).getId(),closestEvents.get(4).getName(), closestEvents.get(4).getType(), closestEvents.get(4).getDate(), closestEvents.get(4).getTime(), closestEvents.get(4).getPriority(), closestEvents.get(4).getNotes(), closestEvents.get(4).getRemindTime());
             }
         });
     }
@@ -139,7 +139,7 @@ private void getClosestEvents(){
         Intent intent=new Intent(this, AddEventPage.class);
         startActivity(intent);
     }
-    private void showWarningDialog(int id, String name, String type, String date, String time, String priority, String notes){
+    private void showWarningDialog(int id, String name, String type, String date, String time, String priority, String notes, String remindTime){
         AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AlertDialogTheme);
         View view = LayoutInflater.from(this).inflate(
                 R.layout.alert_ui,
@@ -147,7 +147,7 @@ private void getClosestEvents(){
         );
         builder.setView(view);
         ((TextView) view.findViewById(R.id.textTitle)).setText(name);
-        ((TextView) view.findViewById(R.id.textMessage)).setText("Type: "+type + "\nDate: "+ date+"\nTime: " + time +"\nPriority: "+ priority + "\nNotes: "+notes);
+        ((TextView) view.findViewById(R.id.textMessage)).setText("Type: "+type + "\nDate: "+ date+"\nTime: " + time +"\nPriority: "+ priority + "\nNotes: "+notes+ "\nRemind Time: "+remindTime);
 
 
         final AlertDialog alertDialog = builder.create();
@@ -164,6 +164,7 @@ private void getClosestEvents(){
                         intent.putExtra("time",time);
                         intent.putExtra("priority",priority);
                         intent.putExtra("notes",notes);
+                        intent.putExtra("remindTime", remindTime);
                         startActivity(intent);
                     }
 
