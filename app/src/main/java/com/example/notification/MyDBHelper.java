@@ -21,7 +21,7 @@ public class MyDBHelper extends SQLiteOpenHelper {
 
     private Context context;
     private static final String DATABASE_NAME = "CalendarApp.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     private static final String TABLE_NAME = "my_Calendar";
     private static final String COLUMN_ID = "_id";
@@ -36,6 +36,7 @@ public class MyDBHelper extends SQLiteOpenHelper {
     public MyDBHelper(@Nullable Context context) {
         super(context,DATABASE_NAME, null, DATABASE_VERSION);
         this.context = context;
+
     }
 
     @Override
@@ -47,9 +48,8 @@ public class MyDBHelper extends SQLiteOpenHelper {
                 COLUMN_DATE + " TEXT, " +
                 COLUMN_TIME + " TEXT, " +
                 COLUMN_PRIORITY + " TEXT, " +
-                COLUMN_NOTES + " TEXT" +
-                COLUMN_RemindTime+
-                ");";
+                COLUMN_NOTES + " TEXT," +
+                COLUMN_RemindTime + " TEXT);" ;
         db.execSQL(query);
 
     }
@@ -69,12 +69,12 @@ public class MyDBHelper extends SQLiteOpenHelper {
         cv.put(COLUMN_DATE,date);
         cv.put(COLUMN_TIME,time);
         cv.put(COLUMN_PRIORITY,priority);
-        cv.put(COLUMN_RemindTime,remind);
-        if(!notes.isEmpty())
-        cv.put(COLUMN_NOTES,notes);
+        if(notes != null && !notes.isEmpty())
+          cv.put(COLUMN_NOTES,notes);
         else
             cv.put(COLUMN_NOTES,"no notes");
 
+        cv.put(COLUMN_RemindTime,remind);
 
         long result = db.insert(TABLE_NAME,null, cv);
         if(result == -1){

@@ -13,6 +13,7 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -60,6 +61,8 @@ public class AddEventPage extends AppCompatActivity implements DatePickerDialog.
     private int month;
     private int day;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,7 +71,6 @@ public class AddEventPage extends AppCompatActivity implements DatePickerDialog.
         cad=Calendar.getInstance();
         rem=Calendar.getInstance();
         createNotificationChannel();
-
 
          //Setup Priority dropDown Menu
         Periorityauto = findViewById(R.id.auto1);
@@ -91,7 +93,6 @@ public class AddEventPage extends AppCompatActivity implements DatePickerDialog.
                 TypeItem = adapterView.getItemAtPosition(i).toString();
             }
         });
-
 
 
         //setup Remind dropDown Menu
@@ -142,7 +143,8 @@ public class AddEventPage extends AppCompatActivity implements DatePickerDialog.
             @Override
             public void onClick(View view) {
                 NameOfEvent = eventNameEditText.getText().toString();
-                NotesOfEvent = eventNotesEditText.getText().toString();
+            NotesOfEvent = eventNotesEditText.getText().toString();
+
                 //Missing field validation
                 String missingFields="";
                 if(NameOfEvent.isEmpty()||NameOfEvent.equals(" ") || NameOfEvent.equals("")|| NotesOfEvent.isEmpty()||NotesOfEvent.equals(" ") || NotesOfEvent.equals("")||EventDate==null||EventTime==null||PeriorityItem==null||TypeItem==null || RemindItem==null) {
@@ -171,7 +173,6 @@ public class AddEventPage extends AppCompatActivity implements DatePickerDialog.
 
                 else {
                     addEventToDB();
-                    //  addEventToCalender();
                     scheduleNotification();
                 }
             }
