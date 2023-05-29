@@ -214,7 +214,7 @@ public class AddEventPage extends AppCompatActivity implements DatePickerDialog.
         deIntent.putExtra("eventTime",EventTime);
         deIntent.putExtra("Priority",PeriorityItem);
         deIntent.putExtra("Type",TypeItem);
-        PendingIntent DetailsIntent=PendingIntent.getBroadcast(this,0,deIntent,PendingIntent.FLAG_MUTABLE);
+        
         /////
 
 
