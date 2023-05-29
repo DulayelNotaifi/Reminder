@@ -51,8 +51,9 @@ public class CalenderPage extends AppCompatActivity {
 
           MyDBHelper dbHelper = new MyDBHelper(this);
           List<Event> Events = dbHelper.readAllEvents();
-          CustomCalendarCellDecorator decorator = new CustomCalendarCellDecorator(Events, datePicker);
-          datePicker.setDecorators(Collections.singletonList(decorator));
+         CustomCalendarCellDecorator decorator = new CustomCalendarCellDecorator(Events, datePicker);
+         datePicker.setDecorators(Collections.singletonList(decorator));
+
         navigation.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {

@@ -123,6 +123,7 @@ public class MyDBHelper extends SQLiteOpenHelper {
         return events;
     }
 
+
     public List<Event> readAllEvents(){
         List<Event> events = new ArrayList<>();
         String selectQuery = "SELECT * FROM " + TABLE_NAME;
@@ -157,6 +158,17 @@ public class MyDBHelper extends SQLiteOpenHelper {
     void deleteAllData(){
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("DELETE FROM " + TABLE_NAME);
+    }
+
+    public void updateEvent(int id,String name,String type,String date, String time, String priority, String notes,String remind){
+String q = "UPDATE " +TABLE_NAME+
+        " SET "+ COLUMN_NAME +" = '"+ name+"',"+ COLUMN_Type +" = '" +type+"',"+COLUMN_DATE +" = '"+ date+
+        "',"+ COLUMN_TIME +" = '" +time+
+            "',"+COLUMN_PRIORITY +" = '" +priority+"',"+COLUMN_NOTES
+        +" = '"+ notes+"',"+ COLUMN_RemindTime +" = '" +remind+
+        "' WHERE "+COLUMN_ID +" = "+id+";";
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL(q);
     }
 
     public String eventsOfDate(Date d){

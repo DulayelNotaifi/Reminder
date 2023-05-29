@@ -178,7 +178,78 @@ public class AddEventPage extends AppCompatActivity implements DatePickerDialog.
 
         // for edit page CAUSING ERROR
 
-//        Intent intent = getIntent();
+       Intent intent = getIntent();
+        if (intent.hasExtra("name")) {
+            // Get event info from intent extras and populate views
+            addEvent.setText("Edit Event");
+        }
+        if(addEvent.getText().equals("Edit Event")){
+
+
+            addEvent.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    if (addEvent.getText().equals("Edit Event")) {
+
+                        //Missing field validation
+                        NameOfEvent = eventNameEditText.getText().toString();
+
+                            MyDBHelper db = new MyDBHelper(AddEventPage.this);
+                            NameOfEvent = eventNameEditText.getText().toString();
+                            NotesOfEvent = eventNotesEditText.getText().toString();
+                            int EventTodelete = intent.getIntExtra("id",0);
+                            if(TypeItem== null) TypeItem =intent.getStringExtra("type");
+                            if(PeriorityItem ==null) PeriorityItem = intent.getStringExtra("priority");
+                            if(RemindItem == null) RemindItem = intent.getStringExtra("remindTime");
+                            if(EventDate == null) EventDate = intent.getStringExtra("date");
+                            if(EventTime == null) EventTime = intent.getStringExtra("time");
+                            db.updateEvent(EventTodelete,NameOfEvent,TypeItem,EventDate,EventTime,PeriorityItem,NotesOfEvent,RemindItem);
+                    }
+                    Toast.makeText(AddEventPage.this, "Event edited sucessfully", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+            });
+
+            // Get event info from intent extras and Populate views with event info
+            eventNameEditText.setText(intent.getStringExtra("name"));
+            Typesauto.setText(intent.getStringExtra("type"));
+            Typesadaptor = new ArrayAdapter<String>(this,R.layout.eventtype_items,typeItems);
+            Typesauto.setAdapter(Typesadaptor);
+            Typesauto.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    TypeItem = adapterView.getItemAtPosition(i).toString();
+                }
+            });
+
+            Periorityauto.setText(intent.getStringExtra("priority"));
+            Periorityadaptor = new ArrayAdapter<String>(this,R.layout.per_items,periorityItems);
+            Periorityauto.setAdapter(Periorityadaptor);
+            Periorityauto.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    PeriorityItem = adapterView.getItemAtPosition(i).toString();
+                }
+            });
+
+            reminauto.setText(intent.getStringExtra("remindTime"));
+            remindadaptor = new ArrayAdapter<String>(this,R.layout.alert_items,remindItems);
+            reminauto.setAdapter(remindadaptor);
+            reminauto.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    RemindItem = adapterView.getItemAtPosition(i).toString();
+                }
+            });
+            eventNotesEditText.setText(intent.getStringExtra("notes"));
+
+            String eventDate = intent.getStringExtra("date");
+            String eventTime = intent.getStringExtra("time");
+
+        }//end big if
+
+
 //        if (intent.hasExtra("name")) {
 //            // Get event info from intent extras and populate views
 //            addEvent.setText("Edit Event");

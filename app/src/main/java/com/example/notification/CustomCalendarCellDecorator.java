@@ -1,5 +1,8 @@
 package com.example.notification;
+import android.content.Context;
 import android.graphics.Color;
+import android.widget.Toast;
+
 import com.squareup.timessquare.CalendarCellDecorator;
 import com.squareup.timessquare.CalendarCellView;
 import com.squareup.timessquare.CalendarPickerView;
@@ -50,6 +53,7 @@ public class CustomCalendarCellDecorator implements CalendarCellDecorator {
     private boolean isSameDay(Date date, String dateString) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         try {
+
             Date d = dateFormat.parse(dateString);
             Calendar cal1 = Calendar.getInstance();
             Calendar cal2 = Calendar.getInstance();
