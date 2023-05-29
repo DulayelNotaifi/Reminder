@@ -195,6 +195,7 @@ public class AddEventPage extends AppCompatActivity implements DatePickerDialog.
                             if(EventDate == null) EventDate = intent.getStringExtra("date");
                             if(EventTime == null) EventTime = intent.getStringExtra("time");
                             db.updateEvent(EventTodelete,NameOfEvent,TypeItem,EventDate,EventTime,PeriorityItem,NotesOfEvent,RemindItem);
+                        scheduleNotification();
                     }
                     Toast.makeText(AddEventPage.this, "Event edited sucessfully", Toast.LENGTH_SHORT).show();
                     finish();
