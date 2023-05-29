@@ -20,16 +20,16 @@ public class CustomCalendarCellDecorator implements CalendarCellDecorator {
     public CustomCalendarCellDecorator(List<Event> events, CalendarPickerView calendarPickerView) {
         mEvents = events;
         mColorMap = new HashMap<>();
-        mColorMap.put("Meeting", Color.BLUE);
-        mColorMap.put("Picnic", Color.GREEN);
-        mColorMap.put("Presentation", Color.CYAN);
-        mColorMap.put("Shopping",Color.DKGRAY);
-        mColorMap.put("Family Visit",Color.YELLOW);
-        mColorMap.put("Study",Color.LTGRAY);
-        mColorMap.put("Appointment",Color.RED);
-        mColorMap.put("Eid", Color.MAGENTA);
-        mColorMap.put("Travel day", Color.GRAY);
-        mColorMap.put("Other",Color.TRANSPARENT);
+        mColorMap.put("Meeting", Color.parseColor("#5E548E")); // dark purple
+        mColorMap.put("Picnic", Color.parseColor("#99B2DD")); // light blue
+        mColorMap.put("Presentation", Color.parseColor("#A4A4BF")); // grayish-purple
+        mColorMap.put("Shopping", Color.parseColor("#B08F7F")); // light brown
+        mColorMap.put("Family Visit", Color.parseColor("#C7B8DE")); // lavender
+        mColorMap.put("Study", Color.parseColor("#D3D3D3")); // light gray
+        mColorMap.put("Appointment", Color.parseColor("#AF5B80")); // reddish-purple
+        mColorMap.put("Eid", Color.parseColor("#9370DB")); // medium purple
+        mColorMap.put("Travel day", Color.parseColor("#8F8F9B")); // gray-purple
+        mColorMap.put("Other", Color.TRANSPARENT);
         mCalendarPickerView = calendarPickerView;
     }
 
