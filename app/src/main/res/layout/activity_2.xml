@@ -173,12 +173,13 @@
             android:orientation="horizontal" >
             <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/dateOfEvent"
-            android:hint="DATE"
+            android:text="DATE"
             android:textColorHint="@color/white"
             android:paddingLeft="10dp"
             android:layout_width="170dp"
             android:layout_height="40dp"
             android:background="@drawable/bottoni"
+            android:textColor="@color/white"
             android:layout_marginTop="4dp"
             android:layout_marginRight="10dp"
             android:layout_marginLeft="20dp"></androidx.appcompat.widget.AppCompatButton>
@@ -186,7 +187,8 @@
 
             <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/timeOfEvent"
-            android:hint="TIME"
+            android:text="TIME"
+            android:textColor="@color/white"
             android:textColorHint="@color/white"
             android:paddingLeft="10dp"
             android:layout_width="170dp"

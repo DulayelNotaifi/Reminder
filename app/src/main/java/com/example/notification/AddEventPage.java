@@ -334,7 +334,7 @@ public class AddEventPage extends AppCompatActivity implements DatePickerDialog.
         }
         String date = ""+year +"-"+monthd+"-"+singleDay;
         EventDate = date;
-
+        dateButt.setText(date);
     }//end onDateSet
 
     @Override
@@ -368,6 +368,7 @@ public class AddEventPage extends AppCompatActivity implements DatePickerDialog.
         else if (datetime.get(Calendar.AM_PM) == Calendar.PM)
             am_pm = "PM";
         EventTime = h2 +":"+m2 +" " +am_pm;
+        timeButt.setText(EventTime);
     }//end onTimeSet
 
     private void createNotificationChannel(){
