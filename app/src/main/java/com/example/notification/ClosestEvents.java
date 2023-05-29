@@ -1,9 +1,6 @@
 package com.example.notification;
 
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
@@ -155,18 +152,28 @@ private void getClosestEvents(){
 
         final AlertDialog alertDialog = builder.create();
         MyDBHelper dbHelper = new MyDBHelper(this);
-        view.findViewById(R.id.buttonConfirm).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.buttonEdit).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 alertDialog.dismiss(); //?????
+                        Intent intent = new Intent(getApplicationContext(), AddEventPage.class);
+                        intent.putExtra("id", id);
+                        intent.putExtra("name", name);
+                        intent.putExtra("type",type);
+                        intent.putExtra("date",date);
+                        intent.putExtra("time",time);
+                        intent.putExtra("priority",priority);
+                        intent.putExtra("notes",notes);
+                        startActivity(intent);
+                    }
 
-            }
         });
 
         view.findViewById(R.id.buttonCancel).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dbHelper.deleteEvent(id);
+                getClosestEvents();
                 alertDialog.dismiss();
 
             }
