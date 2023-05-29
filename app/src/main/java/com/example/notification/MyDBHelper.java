@@ -31,7 +31,7 @@ public class MyDBHelper extends SQLiteOpenHelper {
     private static final String COLUMN_TIME = "Event_TIME";
     private static final String COLUMN_PRIORITY = "Event_priority";
     private static final String COLUMN_NOTES = "Event_notes";
-
+    private static final String COLUMN_RemindTime = "Event_remindTime";
 
     public MyDBHelper(@Nullable Context context) {
         super(context,DATABASE_NAME, null, DATABASE_VERSION);
@@ -47,7 +47,9 @@ public class MyDBHelper extends SQLiteOpenHelper {
                 COLUMN_DATE + " TEXT, " +
                 COLUMN_TIME + " TEXT, " +
                 COLUMN_PRIORITY + " TEXT, " +
-                COLUMN_NOTES + " TEXT);";
+                COLUMN_NOTES + " TEXT" +
+                COLUMN_RemindTime+
+                ");";
         db.execSQL(query);
 
     }
@@ -58,7 +60,7 @@ public class MyDBHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public void addEvent(String name,String type,String date, String time, String priority, String notes){
+    public void addEvent(String name,String type,String date, String time, String priority, String notes,String remind){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
@@ -67,6 +69,7 @@ public class MyDBHelper extends SQLiteOpenHelper {
         cv.put(COLUMN_DATE,date);
         cv.put(COLUMN_TIME,time);
         cv.put(COLUMN_PRIORITY,priority);
+        cv.put(COLUMN_RemindTime,remind);
         if(!notes.isEmpty())
         cv.put(COLUMN_NOTES,notes);
         else

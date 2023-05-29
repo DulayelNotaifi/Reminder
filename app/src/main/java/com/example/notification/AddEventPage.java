@@ -92,6 +92,8 @@ public class AddEventPage extends AppCompatActivity implements DatePickerDialog.
             }
         });
 
+
+
         //setup Remind dropDown Menu
         reminauto = findViewById(R.id.auto3);
         remindadaptor = new ArrayAdapter<String>(this,R.layout.alert_items,remindItems);
@@ -174,10 +176,11 @@ public class AddEventPage extends AppCompatActivity implements DatePickerDialog.
 
        // Get event info from intent extras
         String eventName = intent.getStringExtra("name");
-        String eventType = intent.getStringExtra("type");
+        Typesauto.setText(intent.getStringExtra("type"));
+        Periorityauto.setText(intent.getStringExtra("priority"));
+       // reminauto.setText();
         String eventDate = intent.getStringExtra("date");
         String eventTime = intent.getStringExtra("time");
-        String eventPriority = intent.getStringExtra("priority");
         String eventNotes = intent.getStringExtra("notes");
 
 // Populate views with event info
@@ -246,7 +249,7 @@ public class AddEventPage extends AppCompatActivity implements DatePickerDialog.
     }
     private void addEventToDB() {
         MyDBHelper myDB = new MyDBHelper(AddEventPage.this);
-        myDB.addEvent(NameOfEvent,TypeItem,EventDate,EventTime,PeriorityItem,NotesOfEvent);
+        myDB.addEvent(NameOfEvent,TypeItem,EventDate,EventTime,PeriorityItem,NotesOfEvent,RemindItem);
         Intent intent = new Intent(this, ClosestEvents.class);
         startActivity(intent);
     }//end addEventToDB
