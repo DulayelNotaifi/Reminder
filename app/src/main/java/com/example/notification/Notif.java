@@ -10,6 +10,8 @@ import android.content.Intent;
 import androidx.core.app.NotificationCompat;
 
 import androidx.core.app.NotificationManagerCompat;
+import androidx.core.content.ContextCompat;
+
 import android.content.Context;
 import android.widget.Toast;
 
@@ -40,7 +42,8 @@ public class Notif extends BroadcastReceiver {
         //nmc.notify(17,nb.build());
         String title=intent.getStringExtra("title");
         String message=intent.getStringExtra("message");
-        Intent newIntent=new Intent(context, Details.class);
+        //Context activtyContext=intent.getParcelableExtra("context");
+        Intent newIntent=new Intent( context , Details.class);
         newIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
         PendingIntent Pi=PendingIntent.getActivity(context,0,newIntent,PendingIntent.FLAG_UPDATE_CURRENT|PendingIntent.FLAG_IMMUTABLE);
 
@@ -51,6 +54,7 @@ public class Notif extends BroadcastReceiver {
                 .setContentTitle(title)
                 .setContentText(message)
                 .setContentIntent(Pi)
+                .setAutoCancel(true)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setCategory(NotificationCompat.CATEGORY_MESSAGE)
                 .build();
