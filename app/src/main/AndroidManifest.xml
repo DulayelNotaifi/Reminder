@@ -26,6 +26,13 @@
             android:name=".CalenderPage"
             android:exported="false" />
 
+        <activity android:name=".Details"
+            android:launchMode="singleTask"
+            android:taskAffinity=""
+            android:excludeFromRecents="true"
+            
+            />
+
         <activity
             android:name=".ClosestEvents"
             android:exported="true">
@@ -67,6 +74,13 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
+
+
+      
+
+
+
     </application>
 
 </manifest>
