@@ -44,16 +44,14 @@ import java.util.Iterator;
 import java.util.List;
 
 public class AddEventPage extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener{
+
+   // Define variables
     Calendar cad,rem;
     EditText eventNameEditText,eventNotesEditText , eventTypeEditText,eventDateEditText, eventTimeEditText, eventPriorityEditText;
     Button addEvent,dateButt,timeButt;
-
     String NameOfEvent,NotesOfEvent,EventDate,EventTime,PeriorityItem,TypeItem,RemindItem;
-
     String[] periorityItems = {"High","Medium","Low"};
-    String[] typeItems = {"Meeting","Picnic","Presentation","Shopping","Family Visit","Study",
-            "Appointment","Eid","Travel day","Other"};
-
+    String[] typeItems = {"Meeting","Picnic","Presentation","Shopping","Family Visit","Study","Appointment","Eid","Travel day","Other"};
     String[] remindItems = {"10 min","15 min","20 min","25 min","30 min","35 min","40 min","45 min","50 min","60 min","120 min"};
     AutoCompleteTextView Periorityauto,Typesauto,reminauto;
     ArrayAdapter<String> Periorityadaptor,Typesadaptor,remindadaptor;
@@ -62,12 +60,12 @@ public class AddEventPage extends AppCompatActivity implements DatePickerDialog.
     private int day;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_2);
-        //for noti
+
+        //for notification
         cad=Calendar.getInstance();
         rem=Calendar.getInstance();
         createNotificationChannel();
@@ -109,10 +107,6 @@ public class AddEventPage extends AppCompatActivity implements DatePickerDialog.
 
 
         eventNameEditText = findViewById(R.id.nameOfEvent);
-        /*eventTypeEditText = findViewById(R.id.nameOfEvent);
-        eventDateEditText = findViewById(R.id.dateOfEvent);
-        eventTimeEditText = findViewById(R.id.timeOfEvent);
-        eventPriorityEditText = findViewById(R.id.auto1);*/
         eventNotesEditText = findViewById(R.id.tasksOfEvent);
         addEvent = findViewById(R.id.addEvent);
         dateButt = findViewById(R.id.dateOfEvent);
@@ -138,7 +132,7 @@ public class AddEventPage extends AppCompatActivity implements DatePickerDialog.
             }
         });//end of time listener
 
-        //add event listener
+        //add event button listener
         addEvent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -173,28 +167,21 @@ public class AddEventPage extends AppCompatActivity implements DatePickerDialog.
                     scheduleNotification();
                 }
             }
-        });//end of add event listener
+        });//end of add event button listener
 
 
-        // for edit page CAUSING ERROR
-
+        // In case the page is being displayed for editing
        Intent intent = getIntent();
         if (intent.hasExtra("name")) {
-            // Get event info from intent extras and populate views
             addEvent.setText("Edit Event");
         }
         if(addEvent.getText().equals("Edit Event")){
-
-
             addEvent.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
 
                     if (addEvent.getText().equals("Edit Event")) {
-
-                        //Missing field validation
-                        NameOfEvent = eventNameEditText.getText().toString();
-
+                            NameOfEvent = eventNameEditText.getText().toString();
                             MyDBHelper db = new MyDBHelper(AddEventPage.this);
                             NameOfEvent = eventNameEditText.getText().toString();
                             NotesOfEvent = eventNotesEditText.getText().toString();
@@ -248,35 +235,7 @@ public class AddEventPage extends AppCompatActivity implements DatePickerDialog.
             String eventTime = intent.getStringExtra("time");
 
         }//end big if
-
-
-//        if (intent.hasExtra("name")) {
-//            // Get event info from intent extras and populate views
-//            addEvent.setText("Edit Event");
-//        }
-//        addEvent.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                MyDBHelper db = new MyDBHelper(AddEventPage.this);
-//                if (addEvent.getText().equals("Edit Event")) {
-//                    // Delete existing event
-//                    db.deleteEvent(Integer.parseInt(intent.getStringExtra("id")));
-//                }
-//                // Add edited event to database
-//                addEventToDB();
-//                finish();
-//            }
-//        });
-//
-//       // Get event info from intent extras and Populate views with event info
-//        eventNameEditText.setText(intent.getStringExtra("name"));
-//        Typesauto.setText(intent.getStringExtra("type"));
-//        Periorityauto.setText(intent.getStringExtra("priority"));
-//        reminauto.setText(intent.getStringExtra("remindTime"));
-//        eventNotesEditText.setText(intent.getStringExtra("notes"));
-//
-//        String eventDate = intent.getStringExtra("date");
-//        String eventTime = intent.getStringExtra("time");
+        ////End of editing Page
 
     }//end on Create
 
@@ -402,7 +361,8 @@ public class AddEventPage extends AppCompatActivity implements DatePickerDialog.
         else if (datetime.get(Calendar.AM_PM) == Calendar.PM)
             am_pm = "PM";
         EventTime = h2 +":"+m2 +" " +am_pm;
-    }
+    }//end onTimeSet
+
     private void createNotificationChannel(){
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
         NotificationChannel nc= new NotificationChannel("chan1", "chan1", NotificationManager.IMPORTANCE_DEFAULT);

@@ -161,14 +161,12 @@ public class MyDBHelper extends SQLiteOpenHelper {
     }
 
     public void updateEvent(int id,String name,String type,String date, String time, String priority, String notes,String remind){
-String q = "UPDATE " +TABLE_NAME+
-        " SET "+ COLUMN_NAME +" = '"+ name+"',"+ COLUMN_Type +" = '" +type+"',"+COLUMN_DATE +" = '"+ date+
-        "',"+ COLUMN_TIME +" = '" +time+
-            "',"+COLUMN_PRIORITY +" = '" +priority+"',"+COLUMN_NOTES
-        +" = '"+ notes+"',"+ COLUMN_RemindTime +" = '" +remind+
-        "' WHERE "+COLUMN_ID +" = "+id+";";
+         String Query = "UPDATE " +TABLE_NAME+" SET "+ COLUMN_NAME +" = '"+ name+"',"+ COLUMN_Type +" = '" +type+"',"+COLUMN_DATE +" = '"+ date+
+                        "',"+ COLUMN_TIME +" = '" +time+"',"+COLUMN_PRIORITY +" = '" +priority+"',"+COLUMN_NOTES
+                         +" = '"+ notes+"',"+ COLUMN_RemindTime +" = '" +remind+ "' WHERE "+COLUMN_ID +" = "+id+";";
+         
         SQLiteDatabase db = this.getWritableDatabase();
-        db.execSQL(q);
+        db.execSQL(Query);
     }
 
     public String eventsOfDate(Date d){
