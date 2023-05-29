@@ -272,7 +272,7 @@
             android:layout_marginRight="80dp"
             android:background="@drawable/bottoni"
             android:fontFamily="sans-serif-light"
-            android:text="Submit"
+            android:text="Add Event"
             android:textColor="@color/white"
             android:textSize="20dp">
 

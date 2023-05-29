@@ -57,24 +57,24 @@
         android:textSize="13sp"
         app:layout_constraintBottom_toBottomOf="@id/layoutDialog"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/buttonConfirm"
+        app:layout_constraintEnd_toStartOf="@id/buttonEdit"
         app:layout_constraintTop_toBottomOf="@id/layoutDialog"/>
 
 
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/buttonEdit"
         android:layout_width="0dp"
         android:layout_height="40dp"
-        android:id="@+id/buttonConfirm"
         android:layout_marginStart="5dp"
         android:layout_marginEnd="5dp"
         android:background="@drawable/confirm_button_background"
-        android:text="Confirm"
+        android:text="Edit"
         android:textColor="#FFFFFF"
         android:textSize="13sp"
         app:layout_constraintBottom_toBottomOf="@id/layoutDialog"
         app:layout_constraintEnd_toStartOf="@+id/buttonDismiss"
         app:layout_constraintStart_toEndOf="@id/buttonCancel"
-        app:layout_constraintTop_toBottomOf="@id/layoutDialog"/>
+        app:layout_constraintTop_toBottomOf="@id/layoutDialog" />
 
 
     <androidx.appcompat.widget.AppCompatButton
@@ -89,7 +89,7 @@
         android:textSize="13sp"
         app:layout_constraintBottom_toBottomOf="@id/layoutDialog"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/buttonConfirm"
+        app:layout_constraintStart_toEndOf="@id/buttonEdit"
         app:layout_constraintTop_toBottomOf="@id/layoutDialog"/>
 
 

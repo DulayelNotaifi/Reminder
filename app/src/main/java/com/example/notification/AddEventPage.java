@@ -44,7 +44,7 @@ import java.util.List;
 
 public class AddEventPage extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener{
     Calendar cad,rem;
-    EditText eventNameEditText,eventNotesEditText;
+    EditText eventNameEditText,eventNotesEditText , eventTypeEditText,eventDateEditText, eventTimeEditText, eventPriorityEditText;
     Button addEvent,dateButt,timeButt;
 
     String NameOfEvent,NotesOfEvent,EventDate,EventTime,PeriorityItem,TypeItem,RemindItem;
@@ -106,6 +106,10 @@ public class AddEventPage extends AppCompatActivity implements DatePickerDialog.
 
 
         eventNameEditText = findViewById(R.id.nameOfEvent);
+        /*eventTypeEditText = findViewById(R.id.nameOfEvent);
+        eventDateEditText = findViewById(R.id.dateOfEvent);
+        eventTimeEditText = findViewById(R.id.timeOfEvent);
+        eventPriorityEditText = findViewById(R.id.auto1);*/
         eventNotesEditText = findViewById(R.id.tasksOfEvent);
         addEvent = findViewById(R.id.addEvent);
         dateButt = findViewById(R.id.dateOfEvent);
@@ -146,6 +150,43 @@ public class AddEventPage extends AppCompatActivity implements DatePickerDialog.
                 }
             }
         });//end of add event listener
+
+
+        // for edit page
+        Intent intent = getIntent();
+        if (intent.hasExtra("name")) {
+            // Get event info from intent extras and populate views
+            addEvent.setText("Edit Event");
+        }
+        addEvent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MyDBHelper db = new MyDBHelper(AddEventPage.this);
+                if (addEvent.getText().equals("Edit Event")) {
+                    // Delete existing event
+                    db.deleteEvent(Integer.parseInt(intent.getStringExtra("id")));
+                }
+                // Add edited event to database
+                addEventToDB();
+                finish();
+            }
+        });
+
+       // Get event info from intent extras
+        String eventName = intent.getStringExtra("name");
+        String eventType = intent.getStringExtra("type");
+        String eventDate = intent.getStringExtra("date");
+        String eventTime = intent.getStringExtra("time");
+        String eventPriority = intent.getStringExtra("priority");
+        String eventNotes = intent.getStringExtra("notes");
+
+// Populate views with event info
+        eventNameEditText.setText(eventName);
+        /* eventTypeEditText.setText(eventType);
+        eventDateEditText.setText(eventDate);
+        eventTimeEditText.setText(eventTime);
+        eventPriorityEditText.setText(eventPriority);*/
+        eventNotesEditText.setText(eventNotes);
     }//end on Create
 
 
