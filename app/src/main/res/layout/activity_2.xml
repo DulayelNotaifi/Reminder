@@ -133,7 +133,17 @@
         </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
         ///////////////////////////
-    <LinearLayout
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-light"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:text="Date and Time :"
+            android:textColor="@color/white"
+            android:textSize="20dp" />
+    <!--<LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal" >
@@ -156,33 +166,33 @@
             android:layout_marginTop="10dp"
             android:text="Time :"
             android:textColor="@color/white"
-            android:textSize="20dp" /></LinearLayout>
+            android:textSize="20dp" /></LinearLayout>-->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal" >
             <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/dateOfEvent"
-            android:hint="03-06-2022"
+            android:hint="DATE"
             android:textColorHint="@color/white"
             android:paddingLeft="10dp"
             android:layout_width="170dp"
             android:layout_height="40dp"
             android:background="@drawable/bottoni"
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="4dp"
             android:layout_marginRight="10dp"
             android:layout_marginLeft="20dp"></androidx.appcompat.widget.AppCompatButton>
 
 
             <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/timeOfEvent"
-            android:hint="7:40"
+            android:hint="TIME"
             android:textColorHint="@color/white"
             android:paddingLeft="10dp"
             android:layout_width="170dp"
             android:layout_height="40dp"
             android:background="@drawable/bottoni"
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="4dp"
             android:layout_marginRight="20dp"
             android:layout_marginLeft="20dp"></androidx.appcompat.widget.AppCompatButton></LinearLayout>
         <!--     <TextView
@@ -268,7 +278,7 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginLeft="80dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="27dp"
             android:layout_marginRight="80dp"
             android:background="@drawable/bottoni"
             android:fontFamily="sans-serif-light"
