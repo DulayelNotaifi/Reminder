@@ -21,7 +21,7 @@ public class TimeFragment extends DialogFragment {
         int h = c.get(Calendar.HOUR_OF_DAY);
         int m = c.get(Calendar.MINUTE);
 
-        return new TimePickerDialog(getActivity(),(TimePickerDialog.OnTimeSetListener) getActivity()
+        return new TimePickerDialog(getActivity(), R.style.PurpleDialogTheme,(TimePickerDialog.OnTimeSetListener) getActivity()
                 ,h,m, DateFormat.is24HourFormat(getActivity()));
         //the last argument will display the Time picker depending on the user setting, 24 or 12 format
     }
