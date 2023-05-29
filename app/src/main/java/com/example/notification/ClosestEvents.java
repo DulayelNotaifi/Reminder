@@ -72,7 +72,10 @@ public class ClosestEvents extends AppCompatActivity{
             }
         });
     }
-
+protected void onResume() {
+    super.onResume();
+    getClosestEvents();
+}
 private void getClosestEvents(){
     // Create an instance of the database helper
     MyDBHelper dbHelper = new MyDBHelper(this);

@@ -206,6 +206,8 @@ public class AddEventPage extends AppCompatActivity implements DatePickerDialog.
     private void addEventToDB() {
         MyDBHelper myDB = new MyDBHelper(AddEventPage.this);
         myDB.addEvent(NameOfEvent,TypeItem,EventDate,EventTime,PeriorityItem,NotesOfEvent);
+        Intent intent = new Intent(this, ClosestEvents.class);
+        startActivity(intent);
     }//end addEventToDB
 
 
