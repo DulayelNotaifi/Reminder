@@ -21,7 +21,7 @@ public class MyDBHelper extends SQLiteOpenHelper {
 
     private Context context;
     private static final String DATABASE_NAME = "CalendarApp.db";
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 1;
 
     private static final String TABLE_NAME = "my_Calendar";
     private static final String COLUMN_ID = "_id";
@@ -63,7 +63,6 @@ public class MyDBHelper extends SQLiteOpenHelper {
     public void addEvent(String name,String type,String date, String time, String priority, String notes,String remind){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
-
         cv.put(COLUMN_NAME,name);
         cv.put(COLUMN_Type,type);
         cv.put(COLUMN_DATE,date);
@@ -110,7 +109,7 @@ public class MyDBHelper extends SQLiteOpenHelper {
                 String remindTime = cursor.getString(7);
 
                 // Create a new Event object with the retrieved data and add it to the list
-                Event event = new Event(id, name, type, date,time, priority, notes);
+                Event event = new Event(id, name, type, date,time, priority, notes,remindTime);
                 events.add(event);
 
             } while (cursor.moveToNext());
@@ -140,9 +139,10 @@ public class MyDBHelper extends SQLiteOpenHelper {
                 String time = cursor.getString(4);
                 String priority = cursor.getString(5);
                 String notes = cursor.getString(6);
+                String remindTime = cursor.getString(7);
 
                 // Create a new Event object with the retrieved data and add it to the list
-                Event event = new Event(id, name, type, date,time, priority, notes);
+                Event event = new Event(id, name, type, date,time, priority, notes,remindTime);
                 events.add(event);
 
             } while (cursor.moveToNext());

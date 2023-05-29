@@ -147,7 +147,7 @@ public class AddEventPage extends AppCompatActivity implements DatePickerDialog.
 
                 //Missing field validation
                 String missingFields="";
-                if(NameOfEvent.isEmpty()||NameOfEvent.equals(" ") || NameOfEvent.equals("")|| NotesOfEvent.isEmpty()||NotesOfEvent.equals(" ") || NotesOfEvent.equals("")||EventDate==null||EventTime==null||PeriorityItem==null||TypeItem==null || RemindItem==null) {
+                if(NameOfEvent.isEmpty()||NameOfEvent.equals(" ") || NameOfEvent.equals("")||EventDate==null||EventTime==null||PeriorityItem==null||TypeItem==null || RemindItem==null) {
                     if(NameOfEvent.isEmpty()||NameOfEvent.equals(" ") || NameOfEvent.equals("") )
                         missingFields="Name\n";
                     if(TypeItem==null){
@@ -165,49 +165,47 @@ public class AddEventPage extends AppCompatActivity implements DatePickerDialog.
                     if(RemindItem==null){
                         missingFields+="Reminder\n";
                     }
-                    if(NotesOfEvent.isEmpty()||NotesOfEvent.equals(" ") || NotesOfEvent.equals(""))
-                        missingFields+="Tasks/Notes\n";
-
                     showWarningDialog("Please fill all the missing field:\n" + missingFields);
                 }
 
                 else {
-                    addEventToDB();
+                   addEventToDB();
                     scheduleNotification();
                 }
             }
         });//end of add event listener
 
 
-        // for edit page
-        Intent intent = getIntent();
-        if (intent.hasExtra("name")) {
-            // Get event info from intent extras and populate views
-            addEvent.setText("Edit Event");
-        }
-        addEvent.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                MyDBHelper db = new MyDBHelper(AddEventPage.this);
-                if (addEvent.getText().equals("Edit Event")) {
-                    // Delete existing event
-                    db.deleteEvent(Integer.parseInt(intent.getStringExtra("id")));
-                }
-                // Add edited event to database
-                addEventToDB();
-                finish();
-            }
-        });
+        // for edit page CAUSING ERROR
 
-       // Get event info from intent extras and Populate views with event info
-        eventNameEditText.setText(intent.getStringExtra("name"));
-        Typesauto.setText(intent.getStringExtra("type"));
-        Periorityauto.setText(intent.getStringExtra("priority"));
-        reminauto.setText(intent.getStringExtra("remindTime"));
-        eventNotesEditText.setText(intent.getStringExtra("notes"));
-
-        String eventDate = intent.getStringExtra("date");
-        String eventTime = intent.getStringExtra("time");
+//        Intent intent = getIntent();
+//        if (intent.hasExtra("name")) {
+//            // Get event info from intent extras and populate views
+//            addEvent.setText("Edit Event");
+//        }
+//        addEvent.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                MyDBHelper db = new MyDBHelper(AddEventPage.this);
+//                if (addEvent.getText().equals("Edit Event")) {
+//                    // Delete existing event
+//                    db.deleteEvent(Integer.parseInt(intent.getStringExtra("id")));
+//                }
+//                // Add edited event to database
+//                addEventToDB();
+//                finish();
+//            }
+//        });
+//
+//       // Get event info from intent extras and Populate views with event info
+//        eventNameEditText.setText(intent.getStringExtra("name"));
+//        Typesauto.setText(intent.getStringExtra("type"));
+//        Periorityauto.setText(intent.getStringExtra("priority"));
+//        reminauto.setText(intent.getStringExtra("remindTime"));
+//        eventNotesEditText.setText(intent.getStringExtra("notes"));
+//
+//        String eventDate = intent.getStringExtra("date");
+//        String eventTime = intent.getStringExtra("time");
 
     }//end on Create
 

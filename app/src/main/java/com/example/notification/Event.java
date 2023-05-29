@@ -8,9 +8,10 @@ public class Event {
     private String time;
     private String priority;
     private String notes;
-
     private String remindTime;
-    public Event(int id, String name, String type, String date, String time, String priority, String notes) {
+
+
+    public Event(int id, String name, String type, String date, String time, String priority, String notes,String remind) {
         this.id = id;
         this.name = name;
         this.type = type;
@@ -18,6 +19,7 @@ public class Event {
         this.time = time;
         this.priority = priority;
         this.notes = notes;
+        this.remindTime = remind;
     }
 
     public int getId() {
@@ -51,4 +53,5 @@ public class Event {
     public String getRemindTime() {
         return remindTime;
     }
+
 }
