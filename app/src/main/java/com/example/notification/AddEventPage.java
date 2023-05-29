@@ -261,14 +261,14 @@ public class AddEventPage extends AppCompatActivity implements DatePickerDialog.
         am.set(AlarmManager. RTC_WAKEUP , time , pi) ;
         //////
         //////
-        Intent deIntent=new Intent(this.getApplicationContext(),Details.class);
-        deIntent.putExtra("title",NameOfEvent);
-        deIntent.putExtra("Notes",NotesOfEvent);
-        deIntent.putExtra("eventDate",EventDate);
-        deIntent.putExtra("eventTime",EventTime);
-        deIntent.putExtra("Priority",PeriorityItem);
-        deIntent.putExtra("Type",TypeItem);
-        startActivity(deIntent);
+        //Intent deIntent=new Intent(this.getApplicationContext(),Details.class);
+        //deIntent.putExtra("title",NameOfEvent);
+        //deIntent.putExtra("Notes",NotesOfEvent);
+        //deIntent.putExtra("eventDate",EventDate);
+        //deIntent.putExtra("eventTime",EventTime);
+        //deIntent.putExtra("Priority",PeriorityItem);
+        //deIntent.putExtra("Type",TypeItem);
+
 
         /////
 
