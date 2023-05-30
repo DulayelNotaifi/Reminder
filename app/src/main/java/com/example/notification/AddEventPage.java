@@ -237,7 +237,8 @@ public class AddEventPage extends AppCompatActivity implements DatePickerDialog.
 
             String eventDate = intent.getStringExtra("date");
             String eventTime = intent.getStringExtra("time");
-
+            dateButt.setText(eventDate);
+            timeButt.setText(eventTime);
         }//end big if
         ////End of editing Page
 
