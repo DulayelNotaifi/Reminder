@@ -37,6 +37,7 @@
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="40dp"
             android:textColor="#212121"
+            android:text="ARE YOU SURE YOU WANT TO DELETE THE EVENT? "
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textTitle"/>
@@ -46,42 +47,26 @@
 
 
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/buttondelete"
         android:layout_width="0dp"
         android:layout_height="40dp"
-        android:id="@+id/buttonCancel"
-        android:background="@drawable/cancel_button_background"
         android:layout_marginStart="30dp"
-        android:layout_marginEnd="5dp"
+        android:layout_marginEnd="116dp"
+        android:background="@drawable/cancel_button_background"
         android:text="Delete"
         android:textColor="#FFFFFF"
         android:textSize="13sp"
         app:layout_constraintBottom_toBottomOf="@id/layoutDialog"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/buttonEdit"
-        app:layout_constraintTop_toBottomOf="@id/layoutDialog"/>
-
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/buttonEdit"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginEnd="5dp"
-        android:background="@drawable/confirm_button_background"
-        android:text="Edit"
-        android:textColor="#FFFFFF"
-        android:textSize="13sp"
-        app:layout_constraintBottom_toBottomOf="@id/layoutDialog"
         app:layout_constraintEnd_toStartOf="@+id/buttonDismiss"
-        app:layout_constraintStart_toEndOf="@id/buttonCancel"
-        app:layout_constraintTop_toBottomOf="@id/layoutDialog" />
-
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layoutDialog"
+        app:layout_constraintVertical_bias="0.475" />
 
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/buttonDismiss"
         android:layout_width="0dp"
         android:layout_height="40dp"
-        android:id="@+id/buttonDismiss"
-        android:layout_marginStart="5dp"
         android:layout_marginEnd="30dp"
         android:background="@drawable/dismiss_button_background"
         android:text="Dismiss"
@@ -89,8 +74,8 @@
         android:textSize="13sp"
         app:layout_constraintBottom_toBottomOf="@id/layoutDialog"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/buttonEdit"
-        app:layout_constraintTop_toBottomOf="@id/layoutDialog"/>
+
+        app:layout_constraintTop_toBottomOf="@id/layoutDialog" />
 
 
 

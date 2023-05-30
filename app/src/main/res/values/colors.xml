@@ -24,6 +24,9 @@
     <color name="TraveldayColor">#8800897B</color>
     <color name="OtherColor">#88749097</color>
 
+    <color name="RecycleBackground">#B18FB1</color>
+    <color name="RecycleButt">#9A9A9A</color>
+
 
 
 </resources>

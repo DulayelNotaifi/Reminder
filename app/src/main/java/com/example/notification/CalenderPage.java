@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
@@ -35,6 +37,7 @@ public class CalenderPage extends AppCompatActivity {
     CalendarPickerView datePicker;
     BottomNavigationView navigation;
     Context context;
+    List<Event> Events;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +53,7 @@ public class CalenderPage extends AppCompatActivity {
         datePicker.init(today, nextYear.getTime()).withSelectedDate(today);
 
           MyDBHelper dbHelper = new MyDBHelper(this);
-          List<Event> Events = dbHelper.readAllEvents();
+        Events = dbHelper.readAllEvents();
          CustomCalendarCellDecorator decorator = new CustomCalendarCellDecorator(Events, datePicker);
          datePicker.setDecorators(Collections.singletonList(decorator));
 
@@ -78,8 +81,6 @@ public class CalenderPage extends AppCompatActivity {
 
            MyDBHelper helper = new MyDBHelper(context);
            String myevents = helper.eventsOfDate(date);
-
-
                     ((TextView) view.findViewById(R.id.txTitle)).setText("Events");
                 ((TextView) view.findViewById(R.id.txMessage)).setText(myevents);
                 final AlertDialog alertDialog = builder.create();
@@ -104,7 +105,18 @@ public class CalenderPage extends AppCompatActivity {
 
             }
         });
-    }
+
+        //Recycle view
+        RecyclerView recycle = findViewById(R.id.rec);
+        recycle.setHasFixedSize(true);
+        LinearLayoutManager LayoutManegar = new LinearLayoutManager(context);
+        recycle.setLayoutManager(LayoutManegar);
+
+        EventsRecycleAdapter adapt = new EventsRecycleAdapter(Events,context);
+        recycle.setAdapter(adapt);
+
+
+    }//end OnCreate
 
     private void openhome() {
         Intent intent=new Intent(this, ClosestEvents.class);

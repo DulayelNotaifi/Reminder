@@ -152,8 +152,15 @@ public class MyDBHelper extends SQLiteOpenHelper {
     }
     public void deleteEvent(int idNum) {
         SQLiteDatabase db = this.getReadableDatabase();
-        db.delete(TABLE_NAME, COLUMN_ID + "=" + idNum, null);
+        long result = db.delete(TABLE_NAME, COLUMN_ID + "=" + idNum, null);
+
+        if(result == -1){
+            Toast.makeText(context, "Failed to delete the event", Toast.LENGTH_SHORT).show();
+        }else {
+            Toast.makeText(context, "Event Deleted Successfully!", Toast.LENGTH_SHORT).show();
+        }
         db.close();
+
     }
     void deleteAllData(){
         SQLiteDatabase db = this.getWritableDatabase();
