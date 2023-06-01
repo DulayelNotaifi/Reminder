@@ -21,7 +21,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EventsRecycleAdapter extends RecyclerView.Adapter<EventsRecycleAdapter.EventViewHolder>  {
+public class EventsRecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+    private static final int VIEW_TYPE_HEADER = 0;
+    private static final int VIEW_TYPE_EVENT = 1;
     static List<Event> data;
 static Context context;
 
@@ -35,23 +37,45 @@ public EventsRecycleAdapter(List<Event> data,Context c){
     }
     @NonNull
     @Override
-    public EventViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-      View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.event_row,parent,false);
-        EventViewHolder hold = new EventViewHolder(v, this);
-        return hold;
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        if (viewType == VIEW_TYPE_HEADER) {
+            View headerView = LayoutInflater.from(parent.getContext()).inflate(R.layout.events_header, parent, false);
+            return new HeaderViewHolder(headerView);
+        } else {
+            View eventView = LayoutInflater.from(parent.getContext()).inflate(R.layout.event_row, parent, false);
+            return new EventViewHolder(eventView, this);
+        }
     }
 
+
     @Override
-    public void onBindViewHolder(@NonNull EventViewHolder holder, int position) {
-         Event ev = data.get(position);
-        holder.EventName.setText(ev.getName());
-        holder.EventTime.setText(ev.getTime() );
-        holder.myEvent = ev;
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int position) {
+        if (getItemViewType(position) == VIEW_TYPE_EVENT) {
+            EventViewHolder holder = (EventViewHolder) viewHolder;
+            Event ev = data.get(position - 1); // Subtract 1 to account for the header
+            holder.EventName.setText(ev.getName());
+            holder.EventTime.setText(ev.getTime());
+            holder.myEvent = ev;
+        }
+    }
+    @Override
+    public int getItemViewType(int position) {
+        if (position == 0) {
+            return VIEW_TYPE_HEADER;
+        } else {
+            return VIEW_TYPE_EVENT;
+        }
     }
 
     @Override
     public int getItemCount() {
-        return this.data.size() ;
+        return this.data.size() + 1; // Add 1 to account for the header
+    }
+    // Add a new ViewHolder class for the header
+    public static class HeaderViewHolder extends RecyclerView.ViewHolder {
+        public HeaderViewHolder(@NonNull View itemView) {
+            super(itemView);
+        }
     }
 
     public static class EventViewHolder extends  RecyclerView.ViewHolder {

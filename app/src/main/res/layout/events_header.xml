@@ -10,11 +10,11 @@
 
     <TextView
         android:id="@+id/event"
-        android:layout_width="91dp"
-        android:layout_height="31dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="Events on"
-        android:textColor="@color/purple_200"
-        android:textSize="16sp"
+        android:textColor="@color/white"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -35,18 +35,26 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.25" />
 
-
+    <TextView
+        android:layout_width="41dp"
+        android:layout_height="31dp"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.371"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.25" />
     <Button
         android:id="@+id/addButt"
         android:layout_width="156dp"
-        android:layout_height="43dp"
+        android:layout_height="48dp"
         android:layout_gravity="right"
         android:backgroundTint="@color/RecycleButt"
         android:gravity="center_horizontal"
         android:text="Add Event"
         android:textSize="12sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
 
         app:layout_constraintHorizontal_bias="0.98"
         tools:layout_editor_absoluteY="2dp" />
