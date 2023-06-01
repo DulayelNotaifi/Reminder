@@ -1,5 +1,7 @@
 package com.example.notification;
 
+import static com.example.notification.CalenderPage.REQUEST_CODE_UPDATE_EVENT;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -19,18 +21,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EventsRecycleAdapter extends RecyclerView.Adapter<EventsRecycleAdapter.EventViewHolder>  {
-List<Event> data;
+    static List<Event> data;
 static Context context;
 
 public EventsRecycleAdapter(List<Event> data,Context c){
     this.data = data;
     context = c;
 }
+    public void updateData(List<Event> newData) {
+        this.data = newData;
+        notifyDataSetChanged();
+    }
     @NonNull
     @Override
     public EventViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
       View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.event_row,parent,false);
-        EventViewHolder hold = new EventViewHolder(v);
+        EventViewHolder hold = new EventViewHolder(v, this);
         return hold;
     }
 
@@ -51,8 +57,10 @@ public EventsRecycleAdapter(List<Event> data,Context c){
     TextView EventName;
         TextView EventTime;
         Event myEvent;
-         public EventViewHolder(@NonNull View itemView) {
+        EventsRecycleAdapter adapter;
+         public EventViewHolder(@NonNull View itemView, EventsRecycleAdapter adapter) {
             super(itemView);
+             this.adapter = adapter;
              EventName = itemView.findViewById(R.id.Evname);
              EventTime =  itemView.findViewById(R.id.EvTime);
 
@@ -82,8 +90,15 @@ public EventsRecycleAdapter(List<Event> data,Context c){
                          public void onClick(View view) {
                              MyDBHelper dbHelper = new MyDBHelper(context);
                              dbHelper.deleteEvent(myEvent.getId());
-                             ((CalenderPage) context).calindarEvents(); // update the calendar page
+                             // Remove the event from the list and update the adapter's data
+                             List<Event> updatedData = new ArrayList<>(data);
+                             updatedData.remove(getAdapterPosition());
+                             adapter.updateData(updatedData);
+
                              alertDialog.dismiss();
+
+                             // Update the calendar page after deleting the event and updating the adapter's data
+                             ((CalenderPage) context).calindarEvents();
                          }
                      });
 
@@ -105,6 +120,8 @@ public EventsRecycleAdapter(List<Event> data,Context c){
                      intent.putExtra("notes",myEvent.getPriority());
                      intent.putExtra("remindTime", myEvent.getRemindTime());
                      ((CalenderPage) context).calindarEvents(); // update the calendar page
+                     // Start AddEventPage activity for a result
+                     ((CalenderPage) context).startActivityForResult(intent, REQUEST_CODE_UPDATE_EVENT);
                      context.startActivity(intent);
                  }
              });

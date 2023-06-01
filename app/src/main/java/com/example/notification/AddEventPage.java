@@ -198,6 +198,7 @@ public class AddEventPage extends AppCompatActivity implements DatePickerDialog.
                         scheduleNotification();
                     }
                     Toast.makeText(AddEventPage.this, "Event edited sucessfully", Toast.LENGTH_SHORT).show();
+                    setResult(RESULT_OK);
                     finish();
                 }
             });

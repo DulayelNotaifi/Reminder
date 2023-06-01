@@ -33,7 +33,7 @@ import java.util.List;
 import java.util.Map;
 
 public class CalenderPage extends AppCompatActivity {
-
+    public static final int REQUEST_CODE_UPDATE_EVENT = 1;
     CalendarPickerView datePicker;
 
     BottomNavigationView navigation;
@@ -136,4 +136,13 @@ public class CalenderPage extends AppCompatActivity {
         return datePicker;
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == REQUEST_CODE_UPDATE_EVENT && resultCode == RESULT_OK) {
+            // Refresh the events list and update the adapter's data
+            calindarEvents();
+        }
+    }
 }
