@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -19,6 +20,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class EventsRecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -75,12 +77,22 @@ public EventsRecycleAdapter(List<Event> data,Context c){
     public static class HeaderViewHolder extends RecyclerView.ViewHolder {
         public HeaderViewHolder(@NonNull View itemView) {
             super(itemView);
+            Button addEventButton = itemView.findViewById(R.id.addButt);
+            addEventButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context, AddEventPage.class);
+
+                    context.startActivity(intent);
+                }
+            });
         }
     }
 
     public static class EventViewHolder extends  RecyclerView.ViewHolder {
     TextView EventName;
         TextView EventTime;
+        TextView EventDate;
         Event myEvent;
         EventsRecycleAdapter adapter;
          public EventViewHolder(@NonNull View itemView, EventsRecycleAdapter adapter) {
@@ -88,6 +100,7 @@ public EventsRecycleAdapter(List<Event> data,Context c){
              this.adapter = adapter;
              EventName = itemView.findViewById(R.id.Evname);
              EventTime =  itemView.findViewById(R.id.EvTime);
+             EventDate = itemView.findViewById(R.id.evDate);
 
              itemView.findViewById(R.id.DelButt).setOnClickListener(new View.OnClickListener() {
                  @Override
