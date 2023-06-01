@@ -26,6 +26,7 @@ import java.util.List;
 public class EventsRecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final int VIEW_TYPE_HEADER = 0;
     private static final int VIEW_TYPE_EVENT = 1;
+    private static final int VIEW_TYPE_NO_EVENTS = 2;
     static List<Event> data;
 static Context context;
 
@@ -43,9 +44,12 @@ public EventsRecycleAdapter(List<Event> data,Context c){
         if (viewType == VIEW_TYPE_HEADER) {
             View headerView = LayoutInflater.from(parent.getContext()).inflate(R.layout.events_header, parent, false);
             return new HeaderViewHolder(headerView);
-        } else {
+        } else if (viewType == VIEW_TYPE_EVENT)  {
             View eventView = LayoutInflater.from(parent.getContext()).inflate(R.layout.event_row, parent, false);
             return new EventViewHolder(eventView, this);
+        }else {
+            View noEventsView = LayoutInflater.from(parent.getContext()).inflate(R.layout.no_events, parent, false);
+            return new NoEventsViewHolder(noEventsView);
         }
     }
 
@@ -64,6 +68,8 @@ public EventsRecycleAdapter(List<Event> data,Context c){
     public int getItemViewType(int position) {
         if (position == 0) {
             return VIEW_TYPE_HEADER;
+        } else if (data.isEmpty()) {
+            return VIEW_TYPE_NO_EVENTS;
         } else {
             return VIEW_TYPE_EVENT;
         }
@@ -71,7 +77,13 @@ public EventsRecycleAdapter(List<Event> data,Context c){
 
     @Override
     public int getItemCount() {
-        return this.data.size() + 1; // Add 1 to account for the header
+        return this.data.isEmpty() ? 2 : this.data.size() + 1;
+    }
+    // Add a new ViewHolder class for the "No events" message
+    public static class NoEventsViewHolder extends RecyclerView.ViewHolder {
+        public NoEventsViewHolder(@NonNull View itemView) {
+            super(itemView);
+        }
     }
     // Add a new ViewHolder class for the header
     public static class HeaderViewHolder extends RecyclerView.ViewHolder {
