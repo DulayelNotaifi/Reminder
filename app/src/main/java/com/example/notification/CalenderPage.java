@@ -31,6 +31,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 public class CalenderPage extends AppCompatActivity {
@@ -47,6 +48,18 @@ public class CalenderPage extends AppCompatActivity {
         context = this;
         navigation = findViewById(R.id.nav);
         datePicker = findViewById(R.id.calendar);
+
+        // Get events for today's date
+        Date today = new Date();
+        String todayDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(today);
+        MyDBHelper helper = new MyDBHelper(context);
+        List<Event> myevents = helper.eventsOfDate(today); // Pass Date object instead of String
+
+        // Initialize RecyclerView
+        RecyclerView recycle = findViewById(R.id.rec);
+        recycle.setLayoutManager(new LinearLayoutManager(context));
+        EventsRecycleAdapter adapt = new EventsRecycleAdapter(myevents,context);
+        recycle.setAdapter(adapt);
 
         navigation.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
