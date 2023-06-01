@@ -30,10 +30,13 @@ public class EventsRecycleAdapter extends RecyclerView.Adapter<RecyclerView.View
     static List<Event> data;
 static Context context;
 
-public EventsRecycleAdapter(List<Event> data,Context c){
-    this.data = data;
-    context = c;
-}
+    private static String selectedDate;
+
+    public EventsRecycleAdapter(List<Event> data, Context c, String selectedDate) {
+        this.data = data;
+        context = c;
+        this.selectedDate = selectedDate;
+    }
     public void updateData(List<Event> newData) {
         this.data = newData;
         notifyDataSetChanged();
@@ -89,6 +92,9 @@ public EventsRecycleAdapter(List<Event> data,Context c){
     public static class HeaderViewHolder extends RecyclerView.ViewHolder {
         public HeaderViewHolder(@NonNull View itemView) {
             super(itemView);
+            TextView evDate = itemView.findViewById(R.id.evDate);
+            evDate.setText(selectedDate); // Set the selectedDate text to evDate
+
             Button addEventButton = itemView.findViewById(R.id.addButt);
             addEventButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -104,7 +110,6 @@ public EventsRecycleAdapter(List<Event> data,Context c){
     public static class EventViewHolder extends  RecyclerView.ViewHolder {
     TextView EventName;
         TextView EventTime;
-        TextView EventDate;
         Event myEvent;
         EventsRecycleAdapter adapter;
          public EventViewHolder(@NonNull View itemView, EventsRecycleAdapter adapter) {
@@ -112,7 +117,6 @@ public EventsRecycleAdapter(List<Event> data,Context c){
              this.adapter = adapter;
              EventName = itemView.findViewById(R.id.Evname);
              EventTime =  itemView.findViewById(R.id.EvTime);
-             EventDate = itemView.findViewById(R.id.evDate);
 
              itemView.findViewById(R.id.DelButt).setOnClickListener(new View.OnClickListener() {
                  @Override
