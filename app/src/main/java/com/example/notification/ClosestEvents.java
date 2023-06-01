@@ -73,63 +73,48 @@ protected void onResume() {
     super.onResume();
     getClosestEvents();
 }
-private void getClosestEvents(){
-    // Create an instance of the database helper
-    MyDBHelper dbHelper = new MyDBHelper(this);
+    private void getClosestEvents() {
+        // Create an instance of the database helper
+        MyDBHelper dbHelper = new MyDBHelper(this);
 
-    // Call the getClosestEvents() method to retrieve the closest 5 events
-    List<Event> closestEvents = dbHelper.getClosestEvents();
+        // Call the getClosestEvents() method to retrieve the closest 5 events
+        List<Event> closestEvents = dbHelper.getClosestEvents();
 
-    if(closestEvents.size() == 0)
-        Toast.makeText(this, "NO EVENTS", Toast.LENGTH_SHORT).show();
-    // Assign the name of each retrieved event to a button view in the layout
-    if (closestEvents.size() >= 1) {
-        closestEvent1.setText(closestEvents.get(0).getName());
-        closestEvent1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showWarningDialog(closestEvents.get(0).getId(),closestEvents.get(0).getName(), closestEvents.get(0).getType(), closestEvents.get(0).getDate(), closestEvents.get(0).getTime(), closestEvents.get(0).getPriority(), closestEvents.get(0).getNotes(), closestEvents.get(0).getRemindTime());
-            }
-        });
-    }
-    if (closestEvents.size() >= 2) {
-        closestEvent2.setText(closestEvents.get(1).getName());
-        closestEvent2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showWarningDialog(closestEvents.get(1).getId(),closestEvents.get(1).getName(), closestEvents.get(1).getType(), closestEvents.get(1).getDate(), closestEvents.get(1).getTime(), closestEvents.get(1).getPriority(), closestEvents.get(1).getNotes(), closestEvents.get(1).getRemindTime());
-            }
-        });
-    }
-    if (closestEvents.size() >= 3) {
-        closestEvent3.setText(closestEvents.get(2).getName());
-        closestEvent3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showWarningDialog(closestEvents.get(2).getId(),closestEvents.get(2).getName(), closestEvents.get(2).getType(), closestEvents.get(2).getDate(), closestEvents.get(2).getTime(), closestEvents.get(2).getPriority(), closestEvents.get(2).getNotes(), closestEvents.get(2).getRemindTime());
-            }
-        });
-    }
-    if (closestEvents.size() >= 4) {
-        closestEvent4.setText(closestEvents.get(3).getName());
-        closestEvent4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showWarningDialog(closestEvents.get(3).getId(),closestEvents.get(3).getName(), closestEvents.get(3).getType(), closestEvents.get(3).getDate(), closestEvents.get(3).getTime(), closestEvents.get(3).getPriority(), closestEvents.get(3).getNotes(), closestEvents.get(3).getRemindTime());
-            }
-        });
-    }
-    if (closestEvents.size() >= 5) {
-        closestEvent5.setText(closestEvents.get(4).getName());
-        closestEvent5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showWarningDialog(closestEvents.get(4).getId(),closestEvents.get(4).getName(), closestEvents.get(4).getType(), closestEvents.get(4).getDate(), closestEvents.get(4).getTime(), closestEvents.get(4).getPriority(), closestEvents.get(4).getNotes(), closestEvents.get(4).getRemindTime());
-            }
-        });
-    }
-}
+        Button[] eventButtons = {
+                findViewById(R.id.appCompatButton2),
+                findViewById(R.id.appCompatButton3),
+                findViewById(R.id.appCompatButton4),
+                findViewById(R.id.appCompatButton5),
+                findViewById(R.id.appCompatButton8)
+        };
 
+        // Find the TextView for displaying "NO EVENTS" in your layout
+        TextView noEventsTextView = findViewById(R.id.no_events_text_view);
+
+        if (closestEvents.size() == 0) {
+            noEventsTextView.setVisibility(View.VISIBLE);
+        } else {
+            noEventsTextView.setVisibility(View.GONE);
+        }
+
+        // Assign the name of each retrieved event to a button view in the layout and set visibility
+        for (int i = 0; i < eventButtons.length; i++) {
+            final Button eventButton = eventButtons[i];
+            if (i < closestEvents.size()) {
+                final Event event = closestEvents.get(i);
+                eventButton.setText(event.getName());
+                eventButton.setVisibility(View.VISIBLE);
+                eventButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        showWarningDialog(event.getId(), event.getName(), event.getType(), event.getDate(), event.getTime(), event.getPriority(), event.getNotes(), event.getRemindTime());
+                    }
+                });
+            } else {
+                eventButton.setVisibility(View.GONE);
+            }
+        }
+    }
     private void openCalendarPage() {
         Intent intent=new Intent(this, CalenderPage.class);
         startActivity(intent);
