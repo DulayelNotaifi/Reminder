@@ -118,15 +118,17 @@ public EventsRecycleAdapter(List<Event> data,Context c){
                      intent.putExtra("date",myEvent.getDate());
                      intent.putExtra("time",myEvent.getTime());
                      intent.putExtra("priority",myEvent.getPriority());
-                     intent.putExtra("notes",myEvent.getPriority());
+                     intent.putExtra("notes",myEvent.getNotes());
                      intent.putExtra("remindTime", myEvent.getRemindTime());
                      // Start AddEventPage activity for a result
-                     ((AppCompatActivity) context).startActivityForResult(intent, CalenderPage.REQUEST_CODE_UPDATE_EVENT);
+                     ((AppCompatActivity) context).startActivity(intent);
                      //((CalenderPage) context).startActivityForResult(intent, REQUEST_CODE_UPDATE_EVENT);
                      ((CalenderPage) context).calindarEvents(); // update the calendar page
                      context.startActivity(intent);
                  }
              });
+
+
 
         }
     }

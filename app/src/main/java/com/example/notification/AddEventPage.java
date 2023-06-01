@@ -58,12 +58,13 @@ public class AddEventPage extends AppCompatActivity implements DatePickerDialog.
     private int year;
     private int month;
     private int day;
-
+Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_2);
+        context = this;
 
 
 
@@ -198,8 +199,9 @@ public class AddEventPage extends AppCompatActivity implements DatePickerDialog.
                         scheduleNotification();
                     }
                     Toast.makeText(AddEventPage.this, "Event edited sucessfully", Toast.LENGTH_SHORT).show();
-                    setResult(RESULT_OK);
-                    finish();
+                   // setResult(RESULT_OK);
+                    Intent i = new Intent(context,CalenderPage.class);
+                    startActivity(i);
                 }
             });
 
