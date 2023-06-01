@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -119,9 +120,10 @@ public EventsRecycleAdapter(List<Event> data,Context c){
                      intent.putExtra("priority",myEvent.getPriority());
                      intent.putExtra("notes",myEvent.getPriority());
                      intent.putExtra("remindTime", myEvent.getRemindTime());
-                     ((CalenderPage) context).calindarEvents(); // update the calendar page
                      // Start AddEventPage activity for a result
-                     ((CalenderPage) context).startActivityForResult(intent, REQUEST_CODE_UPDATE_EVENT);
+                     ((AppCompatActivity) context).startActivityForResult(intent, CalenderPage.REQUEST_CODE_UPDATE_EVENT);
+                     //((CalenderPage) context).startActivityForResult(intent, REQUEST_CODE_UPDATE_EVENT);
+                     ((CalenderPage) context).calindarEvents(); // update the calendar page
                      context.startActivity(intent);
                  }
              });

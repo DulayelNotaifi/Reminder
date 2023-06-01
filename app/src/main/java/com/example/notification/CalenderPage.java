@@ -141,8 +141,23 @@ public class CalenderPage extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == REQUEST_CODE_UPDATE_EVENT && resultCode == RESULT_OK) {
-            // Refresh the events list and update the adapter's data
-            calindarEvents();
+            MyDBHelper dbHelper = new MyDBHelper(this);
+            Events = dbHelper.readAllEvents();
+
+            // Update the adapter's data with the refreshed list of events
+            RecyclerView recyclerView = findViewById(R.id.rec);
+            EventsRecycleAdapter eventsRecycleAdapter = (EventsRecycleAdapter) recyclerView.getAdapter();
+            if (eventsRecycleAdapter != null) {
+                eventsRecycleAdapter.updateData(Events);
+            } else {
+                // Create a new adapter with the updated events list if there was no existing adapter
+                EventsRecycleAdapter newAdapter = new EventsRecycleAdapter(Events, context);
+                recyclerView.setAdapter(newAdapter);
+            }
+
+            // Refresh the calendar
+            CustomCalendarCellDecorator decorator = new CustomCalendarCellDecorator(Events, datePicker);
+            datePicker.setDecorators(Collections.singletonList(decorator));
         }
     }
 }
