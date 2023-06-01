@@ -82,6 +82,7 @@ public EventsRecycleAdapter(List<Event> data,Context c){
                          public void onClick(View view) {
                              MyDBHelper dbHelper = new MyDBHelper(context);
                              dbHelper.deleteEvent(myEvent.getId());
+                             ((CalenderPage) context).calindarEvents(); // update the calendar page
                              alertDialog.dismiss();
                          }
                      });
@@ -103,6 +104,7 @@ public EventsRecycleAdapter(List<Event> data,Context c){
                      intent.putExtra("priority",myEvent.getPriority());
                      intent.putExtra("notes",myEvent.getPriority());
                      intent.putExtra("remindTime", myEvent.getRemindTime());
+                     ((CalenderPage) context).calindarEvents(); // update the calendar page
                      context.startActivity(intent);
                  }
              });

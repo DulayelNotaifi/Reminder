@@ -35,6 +35,7 @@ import java.util.Map;
 public class CalenderPage extends AppCompatActivity {
 
     CalendarPickerView datePicker;
+
     BottomNavigationView navigation;
     Context context;
     List<Event> Events;
@@ -44,18 +45,7 @@ public class CalenderPage extends AppCompatActivity {
         setContentView(R.layout.activity_calender_page);
         context = this;
         navigation = findViewById(R.id.nav);
-
-        Date today = new Date();
-        Calendar nextYear = Calendar.getInstance();
-        nextYear.add(Calendar.YEAR, 1);
-
         datePicker = findViewById(R.id.calendar);
-        datePicker.init(today, nextYear.getTime()).withSelectedDate(today);
-
-          MyDBHelper dbHelper = new MyDBHelper(this);
-        Events = dbHelper.readAllEvents();
-         CustomCalendarCellDecorator decorator = new CustomCalendarCellDecorator(Events, datePicker);
-         datePicker.setDecorators(Collections.singletonList(decorator));
 
         navigation.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
@@ -70,6 +60,23 @@ public class CalenderPage extends AppCompatActivity {
             }
         });
 
+        calindarEvents();
+    }//end OnCreate
+
+
+    public void calindarEvents(){
+
+        Date today = new Date();
+        Calendar nextYear = Calendar.getInstance();
+        nextYear.add(Calendar.YEAR, 1);
+
+        datePicker.init(today, nextYear.getTime()).withSelectedDate(today);
+
+        MyDBHelper dbHelper = new MyDBHelper(this);
+        Events = dbHelper.readAllEvents();
+        CustomCalendarCellDecorator decorator = new CustomCalendarCellDecorator(Events, datePicker);
+        datePicker.setDecorators(Collections.singletonList(decorator));
+
         datePicker.setOnDateSelectedListener(new CalendarPickerView.OnDateSelectedListener() {
             @Override
             public void onDateSelected(Date date) {
@@ -79,7 +86,7 @@ public class CalenderPage extends AppCompatActivity {
                         (ConstraintLayout)findViewById(R.id.layoutDialogContainer));
                 builder.setView(view);
 
-           MyDBHelper helper = new MyDBHelper(context);
+                MyDBHelper helper = new MyDBHelper(context);
                 List<Event> myevents = helper.eventsOfDate(date);
                 RecyclerView recycle = findViewById(R.id.rec);
                 EventsRecycleAdapter adapt = new EventsRecycleAdapter(myevents,context);
@@ -119,8 +126,7 @@ public class CalenderPage extends AppCompatActivity {
         recycle.setAdapter(adapt);*/
 
 
-    }//end OnCreate
-
+    }
     private void openhome() {
         Intent intent=new Intent(this, ClosestEvents.class);
         startActivity(intent);
