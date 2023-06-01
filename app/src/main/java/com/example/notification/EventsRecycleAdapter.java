@@ -100,7 +100,7 @@ static Context context;
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(context, AddEventPage.class);
-
+                    intent.putExtra("selectedDate", selectedDate); // Pass the selected date
                     context.startActivity(intent);
                 }
             });
