@@ -28,6 +28,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -144,7 +145,15 @@ public class CalenderPage extends AppCompatActivity {
             MyDBHelper dbHelper = new MyDBHelper(this);
             Events = dbHelper.readAllEvents();
 
-            // Update the adapter's data with the refreshed list of events
+            // Sort the events by their time
+            Collections.sort(Events, new Comparator<Event>() {
+                @Override
+                public int compare(Event e1, Event e2) {
+                    return e1.getTime().compareTo(e2.getTime());
+                }
+            });
+
+            // Update the adapter's data with the refreshed and sorted list of events
             RecyclerView recyclerView = findViewById(R.id.rec);
             EventsRecycleAdapter eventsRecycleAdapter = (EventsRecycleAdapter) recyclerView.getAdapter();
             if (eventsRecycleAdapter != null) {
@@ -158,6 +167,7 @@ public class CalenderPage extends AppCompatActivity {
             // Refresh the calendar
             CustomCalendarCellDecorator decorator = new CustomCalendarCellDecorator(Events, datePicker);
             datePicker.setDecorators(Collections.singletonList(decorator));
+            calindarEvents();
         }
     }
 }
