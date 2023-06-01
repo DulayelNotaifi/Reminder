@@ -176,36 +176,45 @@ public class MyDBHelper extends SQLiteOpenHelper {
         db.execSQL(Query);
     }
 
-    public String eventsOfDate(Date d){
-
+    public List<Event> eventsOfDate(Date d) {
         SQLiteDatabase db = this.getReadableDatabase();
 
+        // Format the date to match the format used in the database
         // Format the date to match the format used in the database
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String strDate = dateFormat.format(d);
 
-        // Define the SQL query to retrieve the event name and time for the specified date
-        String selectQuery = "SELECT " + COLUMN_NAME + ", " + COLUMN_TIME + " FROM " + TABLE_NAME + " WHERE " + COLUMN_DATE + "='" + strDate + "' ORDER BY " + COLUMN_TIME + " ASC";
-        // Execute the query and retrieve the resulting cursor
+// Define the SQL query to retrieve the event data for the specified date
+        String selectQuery = "SELECT " + COLUMN_ID + ", " + COLUMN_NAME + ", " + COLUMN_Type + ", " + COLUMN_DATE + ", " + COLUMN_TIME + ", " + COLUMN_PRIORITY + ", " + COLUMN_NOTES + ", " + COLUMN_RemindTime + " FROM " + TABLE_NAME + " WHERE " + COLUMN_DATE + "='" + strDate + "' ORDER BY " + COLUMN_TIME + " ASC";
+
+// Execute the query and retrieve the resulting cursor
         Cursor cursor = db.rawQuery(selectQuery, null);
 
-        // Initialize a string to hold the results
-        StringBuilder result = new StringBuilder();
+// Initialize a list to hold the events
+        List<Event> events = new ArrayList<>();
 
-        // Iterate over the cursor and retrieve the event name and time for each row
-        if(cursor.moveToFirst()){
-            do{
-                result.append(cursor.getString(0));
-                result.append(" at ");
-                result.append(cursor.getString(1));
-                result.append("\n");
-            }while (cursor.moveToNext());
+// Iterate over the cursor and retrieve the event data for each row
+        while (cursor.moveToNext()) {
+            // Retrieve the event data from the cursor
+            int id = cursor.getInt(0);
+            String name = cursor.getString(1);
+            String type = cursor.getString(2);
+            String date = cursor.getString(3);
+            String time = cursor.getString(4);
+            String priority = cursor.getString(5);
+            String notes = cursor.getString(6);
+            String remindTime = cursor.getString(7);
+
+            // Create a new Event object with the retrieved data and add it to the list
+            Event event = new Event(id, name, type, date, time, priority, notes, remindTime);
+            events.add(event);
         }
 
-        // Close the cursor and the database connection
+// Close the cursor and the database connection
         cursor.close();
         db.close();
 
-        return result.toString();
+// Return the list of events
+        return events;
     }
 }

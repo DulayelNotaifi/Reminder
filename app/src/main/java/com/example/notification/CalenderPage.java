@@ -80,8 +80,11 @@ public class CalenderPage extends AppCompatActivity {
                 builder.setView(view);
 
            MyDBHelper helper = new MyDBHelper(context);
-           String myevents = helper.eventsOfDate(date);
-                    ((TextView) view.findViewById(R.id.txTitle)).setText("Events");
+                List<Event> myevents = helper.eventsOfDate(date);
+                RecyclerView recycle = findViewById(R.id.rec);
+                EventsRecycleAdapter adapt = new EventsRecycleAdapter(myevents,context);
+                recycle.setAdapter(adapt);
+                   /* ((TextView) view.findViewById(R.id.txTitle)).setText("Events");
                 ((TextView) view.findViewById(R.id.txMessage)).setText(myevents);
                 final AlertDialog alertDialog = builder.create();
             //    MyDBHelper dbHelper = new MyDBHelper(context);
@@ -96,7 +99,7 @@ public class CalenderPage extends AppCompatActivity {
                 if (alertDialog.getWindow() != null){
                     alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
                 }
-                alertDialog.show();
+                alertDialog.show();*/
 
             }
 
@@ -112,8 +115,8 @@ public class CalenderPage extends AppCompatActivity {
         LinearLayoutManager LayoutManegar = new LinearLayoutManager(context);
         recycle.setLayoutManager(LayoutManegar);
 
-        EventsRecycleAdapter adapt = new EventsRecycleAdapter(Events,context);
-        recycle.setAdapter(adapt);
+      /*  EventsRecycleAdapter adapt = new EventsRecycleAdapter(Events,context);
+        recycle.setAdapter(adapt);*/
 
 
     }//end OnCreate
