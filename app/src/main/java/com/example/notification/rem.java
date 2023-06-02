@@ -13,9 +13,12 @@ import androidx.core.app.NotificationCompat;
 
 import androidx.core.app.NotificationManagerCompat;
 import android.content.Context;
+import android.widget.Button;
 import android.widget.Toast;
 
 public class rem extends BroadcastReceiver {
+
+    //private Button button= (button) findViewById(R.id.Hhome);
     public static final String CHANNEL_1_ID = "chan1";
     public static String NOTIFICATION_ID = "notification-id" ;
     public static String NOTIFICATION = "notification" ;
@@ -44,6 +47,7 @@ public class rem extends BroadcastReceiver {
         String message=intent.getStringExtra("message");
         Intent newIntent=new Intent( context , Details.class);
 
+
         ////****
         String name=intent.getStringExtra("name");
         String Notes=intent.getStringExtra("Notes");
@@ -51,7 +55,7 @@ public class rem extends BroadcastReceiver {
         String eventTime=intent.getStringExtra("eventTime");
         String Priority=intent.getStringExtra("Priority");
         String Type=intent.getStringExtra("Type");
-        Intent newIntent=new Intent( context , Details.class);
+        //Intent newIntent=new Intent( context , Details.class);
         //newIntent.putExtra("title",title);
         newIntent.putExtra("name",name);
         newIntent.putExtra("Notes",Notes);
@@ -80,5 +84,8 @@ public class rem extends BroadcastReceiver {
         NotificationManager nm=( NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         // Toast.makeText(context.getApplicationContext(),"x",Toast.LENGTH_LONG).show();
         //nm.notify(1, notification);
+
+
+
     }
 }
