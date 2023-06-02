@@ -262,6 +262,18 @@ Context context;
         //Toast.makeText(getApplicationContext(),this.NameOfEvent,Toast.LENGTH_LONG).show();
         notificationIntent.putExtra("title","your "+NameOfEvent+" event starts now");
         notificationIntent.putExtra("message","for more info");/////////////////////////////////////////////////////
+
+
+        /////*****
+        notificationIntent.putExtra("name",NameOfEvent);
+        notificationIntent.putExtra("Notes",NotesOfEvent);
+        notificationIntent.putExtra("eventDate",EventDate);
+        notificationIntent.putExtra("eventTime",EventTime);
+        notificationIntent.putExtra("Priority",PeriorityItem);
+        notificationIntent.putExtra("Type", TypeItem);
+
+        /////****
+
         //Toast.makeText(getApplicationContext(),this.NameOfEvent,Toast.LENGTH_LONG).show();
         PendingIntent pi = PendingIntent.getBroadcast(this, 0,
                 notificationIntent, PendingIntent.FLAG_MUTABLE//FLAG_UPDATE_CURRENT
@@ -273,13 +285,13 @@ Context context;
         am.set(AlarmManager. RTC_WAKEUP , time , pi) ;
         //////
         //////
-        Intent deIntent=new Intent(this.getApplicationContext(),Details.class);
-        deIntent.putExtra("title",NameOfEvent);
-        deIntent.putExtra("Notes",NotesOfEvent);
-        deIntent.putExtra("eventDate",EventDate);
-        deIntent.putExtra("eventTime",EventTime);
-        deIntent.putExtra("Priority",PeriorityItem);
-        deIntent.putExtra("Type",TypeItem);
+        //Intent deIntent=new Intent(this.getApplicationContext(),Details.class);
+        //deIntent.putExtra("title",NameOfEvent);
+        //deIntent.putExtra("Notes",NotesOfEvent);
+        //deIntent.putExtra("eventDate",EventDate);
+        //deIntent.putExtra("eventTime",EventTime);
+       // deIntent.putExtra("Priority",PeriorityItem);
+        //deIntent.putExtra("Type",TypeItem);
 
 
         /////
@@ -292,6 +304,17 @@ Context context;
         //Toast.makeText(getApplicationContext(),this.NameOfEvent,Toast.LENGTH_LONG).show();
         remIntent.putExtra("title","this is a reminder your "+NameOfEvent+" event starts in "+RemindItem);
         remIntent.putExtra("message","for more info");/////////////////////////////////////////////////////
+
+        ///////****
+        remIntent.putExtra("name",NameOfEvent);
+        remIntent.putExtra("Notes",NotesOfEvent);
+        remIntent.putExtra("eventDate",EventDate);
+        remIntent.putExtra("eventTime",EventTime);
+        remIntent.putExtra("Priority",PeriorityItem);
+        remIntent.putExtra("Type", TypeItem);
+        /////***
+
+
         //Toast.makeText(getApplicationContext(),this.NameOfEvent,Toast.LENGTH_LONG).show();
         PendingIntent ri = PendingIntent.getBroadcast(this, 0,
                 remIntent, PendingIntent.FLAG_MUTABLE//FLAG_UPDATE_CURRENT

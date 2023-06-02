@@ -43,6 +43,24 @@ public class rem extends BroadcastReceiver {
         String title=intent.getStringExtra("title");
         String message=intent.getStringExtra("message");
         Intent newIntent=new Intent( context , Details.class);
+
+        ////****
+        String name=intent.getStringExtra("name");
+        String Notes=intent.getStringExtra("Notes");
+        String eventDate=intent.getStringExtra("eventDate");
+        String eventTime=intent.getStringExtra("eventTime");
+        String Priority=intent.getStringExtra("Priority");
+        String Type=intent.getStringExtra("Type");
+        Intent newIntent=new Intent( context , Details.class);
+        //newIntent.putExtra("title",title);
+        newIntent.putExtra("name",name);
+        newIntent.putExtra("Notes",Notes);
+        newIntent.putExtra("eventDate",eventDate);
+        newIntent.putExtra("eventTime",eventTime);
+        newIntent.putExtra("Priority",Priority);
+        newIntent.putExtra("Type",Type);
+
+
         //newIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
         TaskStackBuilder stack=TaskStackBuilder.create(context);
         stack.addNextIntentWithParentStack(newIntent);
