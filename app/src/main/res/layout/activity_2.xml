@@ -110,7 +110,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:inputType="none"
-                android:text="Meeting"
                 android:layout_marginRight="20dp"
                 android:layout_marginLeft="20dp"/>
 
@@ -128,7 +127,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:inputType="none"
-                android:text="High"/>
+               />
 
         </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
@@ -248,7 +247,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:inputType="none"
-                android:text="10 min" />
+               />
 
         </com.google.android.material.textfield.TextInputLayout>
         <TextView
