@@ -245,6 +245,13 @@ Context context;
         }//end big if
         ////End of editing Page
 
+        // Get the selected date from the intent extras
+        if (intent.hasExtra("selectedDate")) {
+
+            String eventDate = intent.getStringExtra("selectedDate");
+            dateButt.setText(eventDate);
+            EventDate = intent.getStringExtra("selectedDate");
+        }
     }//end on Create
 
 
