@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Notification</string>
+    <string name="app_name">MyCalender</string>
     <string name="selectper">Select Priority:</string>
     <string name="select_Type">Select Event Type:</string>
 </resources>
