@@ -36,6 +36,8 @@ import android.widget.Toast;
 //import com.squareup.timessquare.CalendarPickerView;
 
 import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
@@ -136,37 +138,62 @@ Context context;
             @Override
             public void onClick(View view) {
                 NameOfEvent = eventNameEditText.getText().toString();
-            NotesOfEvent = eventNotesEditText.getText().toString();
+                NotesOfEvent = eventNotesEditText.getText().toString();
 
                 //Missing field validation
-                String missingFields="";
-                if(NameOfEvent.isEmpty()||NameOfEvent.equals(" ") || NameOfEvent.equals("")||EventDate==null||EventTime==null||PeriorityItem==null||TypeItem==null || RemindItem==null) {
-                    if(NameOfEvent.isEmpty()||NameOfEvent.equals(" ") || NameOfEvent.equals("") )
-                        missingFields="Name\n";
-                    if(TypeItem==null){
-                        missingFields+="Type\n";
+                String missingFields = "";
+                if (NameOfEvent.trim().isEmpty() || NameOfEvent.equals("") || EventDate == null || EventTime == null || PeriorityItem == null || TypeItem == null || RemindItem == null) {
+                    if (NameOfEvent.trim().isEmpty() || NameOfEvent.equals(""))
+                        missingFields = "Name\n";
+                    if (TypeItem == null) {
+                        missingFields += "Type\n";
                     }
-                    if(PeriorityItem==null){
-                        missingFields+="Priority\n";
+                    if (PeriorityItem == null) {
+                        missingFields += "Priority\n";
                     }
-                    if(EventDate==null){
-                        missingFields+="Date\n";
+                    if (EventDate == null) {
+                        missingFields += "Date\n";
                     }
-                    if(EventTime==null){
-                        missingFields+="Time\n";
+                    if (EventTime == null) {
+                        missingFields += "Time\n";
                     }
-                    if(RemindItem==null){
-                        missingFields+="Reminder\n";
+                    if (RemindItem == null) {
+                        missingFields += "Reminder\n";
                     }
-                    showWarningDialog("Please fill all the missing field:\n" + missingFields);
-                }
+                    missingFields = "Please fill all the missing fields:\n" + missingFields;
+                } else {
+                    try {
+                        // Additional validation for today's date and past time
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
+                        Calendar currentDateTime = Calendar.getInstance();
+                        Calendar selectedDateTime = Calendar.getInstance();
+                        selectedDateTime.setTime(dateFormat.parse(EventDate));
 
-                else {
-                   addEventToDB();
-                    scheduleNotification();
+                        Date parsedEventTime = timeFormat.parse(EventTime);
+                        selectedDateTime.set(Calendar.HOUR_OF_DAY, parsedEventTime.getHours());
+                        selectedDateTime.set(Calendar.MINUTE, parsedEventTime.getMinutes());
+
+                        if (selectedDateTime.get(Calendar.YEAR) == currentDateTime.get(Calendar.YEAR) &&
+                                selectedDateTime.get(Calendar.MONTH) == currentDateTime.get(Calendar.MONTH) &&
+                                selectedDateTime.get(Calendar.DAY_OF_MONTH) == currentDateTime.get(Calendar.DAY_OF_MONTH) &&
+                                selectedDateTime.getTimeInMillis() <= currentDateTime.getTimeInMillis()) {
+
+                            missingFields += "\nPlease select a future time for today's events.";
+                        }
+                    } catch (ParseException e) {
+                        // Handle parsing exceptions
+                        e.printStackTrace();
+                    }
                 }
-            }
-        });//end of add event button listener
+                if (!missingFields.isEmpty()) {
+                    showWarningDialog(missingFields);
+                } else {
+                            addEventToDB();
+                            scheduleNotification();
+                        }
+
+        }});//end of add event button listener
 
 
         // In case the page is being displayed for editing
