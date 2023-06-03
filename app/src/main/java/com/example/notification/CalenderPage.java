@@ -58,12 +58,13 @@ public class CalenderPage extends AppCompatActivity {
         SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd", Locale.getDefault());
         // Format the date as a string
         String SELECTED_DATE =  sdf.format(today);
+        String qSELECTED_DATE = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(today);
         Toast.makeText(this, ""+ SELECTED_DATE+ "", Toast.LENGTH_SHORT).show();
 
         // Initialize RecyclerView
         RecyclerView recycle = findViewById(R.id.rec);
         recycle.setLayoutManager(new LinearLayoutManager(context));
-        EventsRecycleAdapter adapt = new EventsRecycleAdapter(myevents,context , SELECTED_DATE);
+        EventsRecycleAdapter adapt = new EventsRecycleAdapter(myevents,context , qSELECTED_DATE);
         recycle.setAdapter(adapt);
 
         navigation.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
@@ -112,7 +113,8 @@ public class CalenderPage extends AppCompatActivity {
                 SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd", Locale.getDefault());
                 // Format the date as a string
                 String SELECTED_DATE =  sdf.format(date);
-                EventsRecycleAdapter adapt = new EventsRecycleAdapter(myevents,context,SELECTED_DATE );
+                String qSELECTED_DATE = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(date);
+                EventsRecycleAdapter adapt = new EventsRecycleAdapter(myevents,context,qSELECTED_DATE );
                 recycle.setAdapter(adapt);
                    /* ((TextView) view.findViewById(R.id.txTitle)).setText("Events");
                 ((TextView) view.findViewById(R.id.txMessage)).setText(myevents);
@@ -178,6 +180,7 @@ public class CalenderPage extends AppCompatActivity {
             // Get the selected date from the datePicker and format it as a string
             // Create a SimpleDateFormat object with the desired date format
             SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd", Locale.getDefault());
+            String qSELECTED_DATE = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(datePicker.getSelectedDate().getDate());
             String selectedDate = sdf.format(datePicker.getSelectedDate().getDate());
 
             // Update the adapter's data with the refreshed and sorted list of events
@@ -187,9 +190,10 @@ public class CalenderPage extends AppCompatActivity {
                 eventsRecycleAdapter.updateData(Events);
             } else {
                 // Create a new adapter with the updated events list if there was no existing adapter
-                EventsRecycleAdapter newAdapter = new EventsRecycleAdapter(Events, this, selectedDate);
+                EventsRecycleAdapter newAdapter = new EventsRecycleAdapter(Events, this, qSELECTED_DATE);
                 recyclerView.setAdapter(newAdapter);
             }
+
 
             // Refresh the calendar
             CustomCalendarCellDecorator decorator = new CustomCalendarCellDecorator(Events, datePicker);
