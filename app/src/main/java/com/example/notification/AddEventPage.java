@@ -58,6 +58,7 @@ public class AddEventPage extends AppCompatActivity implements DatePickerDialog.
     AutoCompleteTextView Periorityauto,Typesauto,reminauto;
     ArrayAdapter<String> Periorityadaptor,Typesadaptor,remindadaptor;
 Context context;
+int yahoooo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -223,6 +224,7 @@ Context context;
                         );//getActivity
                         AlarmManager am=(AlarmManager)context.getSystemService(ALARM_SERVICE);
                         am.cancel(pi);
+                        pi.cancel();
 
 
                         Intent remIntent = new Intent(context, rem.class);
@@ -231,7 +233,9 @@ Context context;
                         );
                         AlarmManager rm=(AlarmManager)context.getSystemService(ALARM_SERVICE);
                         rm.cancel(ri) ;
-                            db.updateEvent(EventTodelete,NameOfEvent,TypeItem,EventDate,EventTime,PeriorityItem,NotesOfEvent,RemindItem);
+                        ri.cancel();
+                        db.updateEvent(EventTodelete,NameOfEvent,TypeItem,EventDate,EventTime,PeriorityItem,NotesOfEvent,RemindItem);
+
                         scheduleNotification();
                     }
                     Toast.makeText(AddEventPage.this, "Event edited sucessfully", Toast.LENGTH_SHORT).show();
@@ -313,6 +317,7 @@ Context context;
         notificationIntent.putExtra("eventTime",EventTime);
         notificationIntent.putExtra("Priority",PeriorityItem);
         notificationIntent.putExtra("Type", TypeItem);
+        //Toast.makeText(getApplicationContext(),this.NameOfEvent +"  ",Toast.LENGTH_LONG).show();
 
         /////****
 
@@ -352,7 +357,7 @@ Context context;
 
 
         //Toast.makeText(getApplicationContext(),this.NameOfEvent,Toast.LENGTH_LONG).show();
-        PendingIntent ri = PendingIntent.getBroadcast(this, iddd+1000000 ,
+        PendingIntent ri = PendingIntent.getBroadcast(this, iddd+1000000,
                 remIntent, PendingIntent.FLAG_MUTABLE//FLAG_UPDATE_CURRENT
         );//getActivity
         getTime(Integer.parseInt(RemindItem.substring(0,RemindItem.indexOf(" "))));/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
