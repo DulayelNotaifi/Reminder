@@ -2,6 +2,8 @@ package com.example.notification;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -10,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class Details extends AppCompatActivity {
     TextView txt1, txt2, txt3, txt4, txt5, txt6;
+    Button Button22;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -36,15 +39,18 @@ public class Details extends AppCompatActivity {
         txt5.setText( "Event Priority: " + pri);
         txt6.setText( "Event Type: " + type);
 
-        //Bundle r=getIntent().getStringExtra()
-        // try{
-        // if (e != null) {
-        //String title = e.getString("title");
-        //String notes = e.getString("Notes");
-        //String date = e.getString("eventDate");
-        //String time = e.getString("eventTime");
-        //String pri = e.getString("Priority");
-        //String type = e.getString("Type");
+        Button22=(Button)findViewById(R.id.Hhome);
+
+        Button22.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openClosestsEvents();
+            }
+        });
+
+
+
+
 
 
 
@@ -55,5 +61,10 @@ public class Details extends AppCompatActivity {
         // Toast.makeText(this,g.getMessage(),Toast.LENGTH_SHORT).show();
         // }
 
-    }}
+    }
+    public void  openClosestsEvents(){
+        Intent openClosest=new Intent(this, ClosestEvents.class);
+        startActivity(openClosest);
+ }
+}
 
