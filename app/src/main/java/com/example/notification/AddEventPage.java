@@ -201,6 +201,7 @@ Context context;
                     Toast.makeText(AddEventPage.this, "Event edited sucessfully", Toast.LENGTH_SHORT).show();
                    // setResult(RESULT_OK);
                     Intent i = new Intent(context,CalenderPage.class);
+                    i.putExtra("addedDate", EventDate );
                     startActivity(i);
                 }
             });
@@ -247,7 +248,6 @@ Context context;
 
         // Get the selected date from the intent extras
         if (intent.hasExtra("selectedDate")) {
-
             String eventDate = intent.getStringExtra("selectedDate");
             dateButt.setText(eventDate);
             EventDate = intent.getStringExtra("selectedDate");
@@ -339,8 +339,9 @@ Context context;
     private void addEventToDB() {
         MyDBHelper myDB = new MyDBHelper(AddEventPage.this);
         myDB.addEvent(NameOfEvent,TypeItem,EventDate,EventTime,PeriorityItem,NotesOfEvent,RemindItem);
-        Intent intent = new Intent(this, ClosestEvents.class);
-        startActivity(intent);
+        Intent i = new Intent(this, CalenderPage.class);
+        i.putExtra("addedDate", EventDate );
+        startActivity(i);
     }//end addEventToDB
 
 

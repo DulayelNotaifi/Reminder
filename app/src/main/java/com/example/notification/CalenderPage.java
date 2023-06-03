@@ -50,23 +50,45 @@ public class CalenderPage extends AppCompatActivity {
         datePicker = findViewById(R.id.calendar);
 
         // Get events for today's date
-        Date today = new Date();
-        String todayDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(today);
         MyDBHelper helper = new MyDBHelper(context);
-        List<Event> myevents = helper.eventsOfDate(today); // Pass Date object instead of String
-        // Create a SimpleDateFormat object with the desired date format
+
         SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd", Locale.getDefault());
         // Format the date as a string
-        String SELECTED_DATE =  sdf.format(today);
-        String qSELECTED_DATE = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(today);
-        Toast.makeText(this, ""+ SELECTED_DATE+ "", Toast.LENGTH_SHORT).show();
+        String SELECTED_DATE ;
+        String qSELECTED_DATE ;
 
         // Initialize RecyclerView
         RecyclerView recycle = findViewById(R.id.rec);
         recycle.setLayoutManager(new LinearLayoutManager(context));
-        EventsRecycleAdapter adapt = new EventsRecycleAdapter(myevents,context , qSELECTED_DATE);
-        recycle.setAdapter(adapt);
 
+
+
+        Intent intent = getIntent();
+        if (intent.hasExtra("addedDate")) {
+            try {
+                Date addedDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(intent.getStringExtra("addedDate"));
+                List<Event> myevents = helper.eventsOfDate(addedDate);
+                SELECTED_DATE = sdf.format(addedDate);
+                qSELECTED_DATE = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(addedDate);
+                EventsRecycleAdapter adapt = new EventsRecycleAdapter(myevents, context, qSELECTED_DATE);
+                recycle.setAdapter(adapt);
+
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }else {
+            // Get events for today's date
+            Date today = new Date();
+            String todayDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(today);
+            List<Event> myevents = helper.eventsOfDate(today); // Pass Date object instead of String
+            // Create a SimpleDateFormat object with the desired date format
+            // Format the date as a string
+            SELECTED_DATE = sdf.format(today);
+            qSELECTED_DATE = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(today);
+
+            EventsRecycleAdapter adapt = new EventsRecycleAdapter(myevents, context, qSELECTED_DATE);
+            recycle.setAdapter(adapt);
+        }
         navigation.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
