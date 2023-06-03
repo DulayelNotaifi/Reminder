@@ -55,9 +55,6 @@ public class AddEventPage extends AppCompatActivity implements DatePickerDialog.
     String[] remindItems = {"10 min","15 min","20 min","25 min","30 min","35 min","40 min","45 min","50 min","60 min","120 min"};
     AutoCompleteTextView Periorityauto,Typesauto,reminauto;
     ArrayAdapter<String> Periorityadaptor,Typesadaptor,remindadaptor;
-    private int year;
-    private int month;
-    private int day;
 Context context;
 
     @Override
@@ -65,8 +62,6 @@ Context context;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_2);
         context = this;
-
-
 
 
         //for notification
@@ -292,12 +287,6 @@ Context context;
         //deIntent.putExtra("eventTime",EventTime);
        // deIntent.putExtra("Priority",PeriorityItem);
         //deIntent.putExtra("Type",TypeItem);
-
-
-        /////
-
-        /////
-
 
 
         Intent remIntent = new Intent(this.getApplicationContext(), rem.class);

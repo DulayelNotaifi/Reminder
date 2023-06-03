@@ -122,11 +122,6 @@ public class CalenderPage extends AppCompatActivity {
         datePicker.setOnDateSelectedListener(new CalendarPickerView.OnDateSelectedListener() {
             @Override
             public void onDateSelected(Date date) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.AlertDialogTheme);
-                View view = LayoutInflater.from(context).inflate(
-                        R.layout.popup_ui,
-                        (ConstraintLayout)findViewById(R.id.layoutDialogContainer));
-                builder.setView(view);
 
                 MyDBHelper helper = new MyDBHelper(context);
                 List<Event> myevents = helper.eventsOfDate(date);
@@ -138,29 +133,11 @@ public class CalenderPage extends AppCompatActivity {
                 String qSELECTED_DATE = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(date);
                 EventsRecycleAdapter adapt = new EventsRecycleAdapter(myevents,context,qSELECTED_DATE );
                 recycle.setAdapter(adapt);
-                   /* ((TextView) view.findViewById(R.id.txTitle)).setText("Events");
-                ((TextView) view.findViewById(R.id.txMessage)).setText(myevents);
-                final AlertDialog alertDialog = builder.create();
-            //    MyDBHelper dbHelper = new MyDBHelper(context);
-
-                view.findViewById(R.id.buttonDismiss).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        alertDialog.dismiss();
-
-                    }
-                });
-                if (alertDialog.getWindow() != null){
-                    alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
-                }
-                alertDialog.show();*/
 
             }
 
             @Override
-            public void onDateUnselected(Date date) {
-
-            }
+            public void onDateUnselected(Date date) {}
         });
 
         //Recycle view
@@ -168,19 +145,10 @@ public class CalenderPage extends AppCompatActivity {
         recycle.setHasFixedSize(true);
         LinearLayoutManager LayoutManegar = new LinearLayoutManager(context);
         recycle.setLayoutManager(LayoutManegar);
-
-      /*  EventsRecycleAdapter adapt = new EventsRecycleAdapter(Events,context);
-        recycle.setAdapter(adapt);*/
-
-
     }
     private void openhome() {
         Intent intent=new Intent(this, ClosestEvents.class);
         startActivity(intent);
-    }
-
-    public CalendarPickerView getCalendarPickerView() {
-        return datePicker;
     }
 
     @Override
@@ -215,7 +183,6 @@ public class CalenderPage extends AppCompatActivity {
                 EventsRecycleAdapter newAdapter = new EventsRecycleAdapter(Events, this, qSELECTED_DATE);
                 recyclerView.setAdapter(newAdapter);
             }
-
 
             // Refresh the calendar
             CustomCalendarCellDecorator decorator = new CustomCalendarCellDecorator(Events, datePicker);

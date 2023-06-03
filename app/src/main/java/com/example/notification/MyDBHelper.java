@@ -162,11 +162,6 @@ public class MyDBHelper extends SQLiteOpenHelper {
         db.close();
 
     }
-    void deleteAllData(){
-        SQLiteDatabase db = this.getWritableDatabase();
-        db.execSQL("DELETE FROM " + TABLE_NAME);
-    }
-
     public void updateEvent(int id,String name,String type,String date, String time, String priority, String notes,String remind){
          String Query = "UPDATE " +TABLE_NAME+" SET "+ COLUMN_NAME +" = '"+ name+"',"+ COLUMN_Type +" = '" +type+"',"+COLUMN_DATE +" = '"+ date+
                         "',"+ COLUMN_TIME +" = '" +time+"',"+COLUMN_PRIORITY +" = '" +priority+"',"+COLUMN_NOTES

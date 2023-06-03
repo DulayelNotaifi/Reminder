@@ -28,8 +28,7 @@ public class EventsRecycleAdapter extends RecyclerView.Adapter<RecyclerView.View
     private static final int VIEW_TYPE_EVENT = 1;
     private static final int VIEW_TYPE_NO_EVENTS = 2;
     static List<Event> data;
-static Context context;
-
+    static Context context;
     private static String selectedDate;
 
     public EventsRecycleAdapter(List<Event> data, Context c, String selectedDate) {
@@ -127,12 +126,10 @@ static Context context;
                      builder.setView(v);
                      final AlertDialog alertDialog = builder.create();
 
-
                      v.findViewById(R.id.buttonDismiss).setOnClickListener(new View.OnClickListener() {
                          @Override
                          public void onClick(View view) {
                              alertDialog.dismiss();
-
                          }
                      });
                      if (alertDialog.getWindow() != null){
@@ -146,9 +143,8 @@ static Context context;
                              dbHelper.deleteEvent(myEvent.getId());
                              // Remove the event from the list and update the adapter's data
                              List<Event> updatedData = new ArrayList<>(data);
-                             updatedData.remove(getAdapterPosition());
+                             updatedData.remove(getAdapterPosition()-1);
                              adapter.updateData(updatedData);
-
                              alertDialog.dismiss();
 
                              // Update the calendar page after deleting the event and updating the adapter's data
@@ -180,9 +176,6 @@ static Context context;
                      context.startActivity(intent);
                  }
              });
-
-
-
         }
     }
 }
