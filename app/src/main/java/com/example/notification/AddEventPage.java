@@ -217,6 +217,20 @@ Context context;
                             if(RemindItem == null) RemindItem = intent.getStringExtra("remindTime");
                             if(EventDate == null) EventDate = intent.getStringExtra("date");
                             if(EventTime == null) EventTime = intent.getStringExtra("time");
+                        Intent notificationIntent = new Intent(context, Notif.class);
+                        PendingIntent pi = PendingIntent.getBroadcast(context, EventTodelete,
+                                notificationIntent, PendingIntent.FLAG_MUTABLE
+                        );//getActivity
+                        AlarmManager am=(AlarmManager)context.getSystemService(ALARM_SERVICE);
+                        am.cancel(pi);
+
+
+                        Intent remIntent = new Intent(context, rem.class);
+                        PendingIntent ri = PendingIntent.getBroadcast(context, EventTodelete+1000000,
+                                remIntent, PendingIntent.FLAG_MUTABLE//FLAG_UPDATE_CURRENT//FLAG_MUTABLE
+                        );
+                        AlarmManager rm=(AlarmManager)context.getSystemService(ALARM_SERVICE);
+                        rm.cancel(ri) ;
                             db.updateEvent(EventTodelete,NameOfEvent,TypeItem,EventDate,EventTime,PeriorityItem,NotesOfEvent,RemindItem);
                         scheduleNotification();
                     }
@@ -277,7 +291,13 @@ Context context;
     }//end on Create
 
 
+    int idio(String name){
+        MyDBHelper myDB = new MyDBHelper(AddEventPage.this);
+        return myDB.idio(name);
+    }
+
     void scheduleNotification() {
+        int iddd=idio(NameOfEvent);
         cad.set(Calendar.SECOND,0);
         rem.set(Calendar.SECOND,0);
         Intent notificationIntent = new Intent(this.getApplicationContext(), Notif.class);
@@ -297,7 +317,7 @@ Context context;
         /////****
 
         //Toast.makeText(getApplicationContext(),this.NameOfEvent,Toast.LENGTH_LONG).show();
-        PendingIntent pi = PendingIntent.getBroadcast(this, 0,
+        PendingIntent pi = PendingIntent.getBroadcast(this, iddd,
                 notificationIntent, PendingIntent.FLAG_MUTABLE//FLAG_UPDATE_CURRENT
         );//getActivity
         AlarmManager am=(AlarmManager)getSystemService(ALARM_SERVICE);
@@ -332,7 +352,7 @@ Context context;
 
 
         //Toast.makeText(getApplicationContext(),this.NameOfEvent,Toast.LENGTH_LONG).show();
-        PendingIntent ri = PendingIntent.getBroadcast(this, 0,
+        PendingIntent ri = PendingIntent.getBroadcast(this, iddd+1000000 ,
                 remIntent, PendingIntent.FLAG_MUTABLE//FLAG_UPDATE_CURRENT
         );//getActivity
         getTime(Integer.parseInt(RemindItem.substring(0,RemindItem.indexOf(" "))));/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

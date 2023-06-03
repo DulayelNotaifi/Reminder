@@ -8,6 +8,11 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import static android.content.Context.ALARM_SERVICE;
+
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Intent;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -150,7 +155,45 @@ public class MyDBHelper extends SQLiteOpenHelper {
         }//end if
      return events;
     }
-    public void deleteEvent(int idNum) {
+    int idio(String name) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String selectQuery = "SELECT " + COLUMN_ID + " FROM " + TABLE_NAME + " WHERE " + COLUMN_NAME + "='" + name + "'";
+
+// Execute the query and retrieve the resulting cursor
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        int id = 0;
+
+// Iterate over the cursor and retrieve the event data for each row
+        while (cursor.moveToNext()) {
+            // Retrieve the event data from the cursor
+            id = cursor.getInt(0);
+
+        }
+
+// Close the cursor and the database connection
+        cursor.close();
+        db.close();
+        return id;
+    }
+        public void deleteEvent(int idNum) {
+        //Toast.makeText(context.getApplicationContext(),idNum+" id",Toast.LENGTH_LONG).show();
+
+        Intent notificationIntent = new Intent(context, Notif.class);
+        PendingIntent pi = PendingIntent.getBroadcast(context, idNum,
+                notificationIntent, PendingIntent.FLAG_MUTABLE
+        );//getActivity
+        AlarmManager am=(AlarmManager)context.getSystemService(ALARM_SERVICE);
+        am.cancel(pi);
+
+
+        Intent remIntent = new Intent(context, rem.class);
+        PendingIntent ri = PendingIntent.getBroadcast(context, idNum+1000000,
+                remIntent, PendingIntent.FLAG_MUTABLE//FLAG_UPDATE_CURRENT//FLAG_MUTABLE
+        );
+        AlarmManager rm=(AlarmManager)context.getSystemService(ALARM_SERVICE);
+        rm.cancel(ri) ;
+
         SQLiteDatabase db = this.getReadableDatabase();
         long result = db.delete(TABLE_NAME, COLUMN_ID + "=" + idNum, null);
 
